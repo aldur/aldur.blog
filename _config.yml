@@ -46,6 +46,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-redirect-from
+  - jekyll-relative-links
   # This requires `url` being set.
   # Also, its effect depend on _where_ you position in in the plugins list.
   # See: https://github.com/jekyll/jekyll-sitemap
@@ -99,6 +100,7 @@ exclude:
   - cloudflare_build.sh
   # OG image rendering toolchain (see _plugins/og_image.rb, bin/og-render.mjs).
   - bin/
+  - test/
   - node_modules/
   - package.json
   - pnpm-lock.yaml
@@ -146,6 +148,10 @@ collections:
 
 redirect_from:
   json: false
+
+relative_links:
+  collections: true
+  strict: true
 
 feed:
   collections:

@@ -65,6 +65,8 @@ GEM
       jekyll (>= 3.7, < 5.0)
     jekyll-redirect-from (0.16.0)
       jekyll (>= 3.3, < 5.0)
+    jekyll-relative-links (0.8.0)
+      jekyll (>= 3.3, < 5.0)
     jekyll-sass-converter (3.1.0)
       sass-embedded (~> 1.75)
     jekyll-seo-tag (2.8.0)
@@ -119,6 +121,7 @@ DEPENDENCIES
   jekyll (~> 4.4)
   jekyll-feed (~> 0.17)
   jekyll-redirect-from (~> 0.16)
+  jekyll-relative-links (~> 0.7)
   jekyll-seo-tag (~> 2.8)
   jekyll-sitemap (~> 1.4)
   logger
