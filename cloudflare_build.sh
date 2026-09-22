@@ -5,7 +5,7 @@ set -euo pipefail
 # Uses CF_PAGES_URL for preview deployments so that OG images and canonical
 # URLs point to the correct preview domain.
 
-pnpm install --frozen-lockfile
+# No need for pnpm install, Cloudflare runs it automatically.
 
 configs="_config.yml,cloudflare_pages._config.yml"
 
