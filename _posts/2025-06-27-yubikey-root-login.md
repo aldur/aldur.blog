@@ -6,12 +6,12 @@ excerpt: >
 tags: [ChromeOS]
 ---
 
-When working in [NixOS containers under ChromeOS]({% link
-_posts/2025-06-19-nixos-in-crostini.md %}), the container users `root` and
-`aldur` have no password. This is very convenient, as it avoids managing
-secrets in the NixOS configuration. However, it makes securely escalating
-privileges tricky: both `sudo` and `su` ask for the user password, which we
-can't provide.
+When working in
+[NixOS containers under ChromeOS](2025-06-19-nixos-in-crostini.md), the
+container users `root` and `aldur` have no password. This is very convenient,
+as it avoids managing secrets in the NixOS configuration. However, it makes
+securely escalating privileges tricky: both `sudo` and `su` ask for the user
+password, which we can't provide.
 
 This post details my journey to find a secure and usable privilege escalation
 method for NixOS containers.
@@ -42,11 +42,11 @@ ideal.
 
 ### Take 2: _unsupported_, `pam-u2f`
 
-Since I [already use a Yubikey]({% link _posts/2025-06-26-yubikey-agent.md %})
-to authenticate through SSH, sign commits, and even decrypt vaults, I
-considered using it for privilege escalation as well. This approach would
-maintain a separation of concerns between the users while
-providing a reasonable security posture[^shared_kernel].
+Since I [already use a Yubikey](2025-06-26-yubikey-agent.md) to authenticate
+through SSH, sign commits, and even decrypt vaults, I considered using it for
+privilege escalation as well. This approach would maintain a separation of
+concerns between the users while providing a reasonable security
+posture[^shared_kernel].
 
 The [`pam-u2f`](https://github.com/Yubico/pam-u2f) module is the modern way to
 go for this. However, FIDO2 doesn't currently work under Crostini, due to

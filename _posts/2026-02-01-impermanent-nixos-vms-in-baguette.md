@@ -5,19 +5,19 @@ excerpt: >
 tags: [ChromeOS]
 ---
 
-We have [talked about]({% link _tag_indexes/ChromeOS.md %}) using NixOS to run
-VMs under ChromeOS. The VM image doesn't include any secrets and relies on
-hardware keys for authentication and signatures (e.g., to push and sign commits
-on GitHub). This way, even if the VM was compromised, the hardware-backed
+We have [talked about](../_tag_indexes/ChromeOS.md) using NixOS to run VMs
+under ChromeOS. The VM image doesn't include any secrets and relies on hardware
+keys for authentication and signatures (e.g., to push and sign commits on
+GitHub). This way, even if the VM was compromised, the hardware-backed
 credentials would remain safe.
 
 In practice, though, the VM slowly accumulates other (possibly) confidential
-information: source code, [authentication tokens]({% link
-_micros/short-lived-openrouter-api-keys.md %}), LLM sessions, and even shell
-history. To clean things up, a user would need to periodically destroy and
-recreate the VM. But users (myself included) get sloppy, for instance when
-overworked. Worse, being in a VM might give them a wrong sense of confidence
-that there is nothing to leak!
+information: source code,
+[authentication tokens](../_micros/short-lived-openrouter-api-keys.md), LLM
+sessions, and even shell history. To clean things up, a user would need to
+periodically destroy and recreate the VM. But users (myself included) get
+sloppy, for instance when overworked. Worse, being in a VM might give them a
+wrong sense of confidence that there is nothing to leak!
 
 ### What is impermanence
 
@@ -31,8 +31,10 @@ runtime (typically, by symlinking files and directories to the appropriate path
 in the store). We can _leverage_ that to achieve _impermanence_ and ensure a
 clean system after each reboot.
 
-[^baguette]: Pretty much what happens when the [Baguette NixOS image]({%
-  post_url 2025-10-29-nixos-baguette-images-in-chromeos %}) starts.
+[^baguette]:
+    Pretty much what happens when the
+    [Baguette NixOS image](2025-10-29-nixos-baguette-images-in-chromeos.md)
+    starts.
 
 The Nix community has contributed a few ways to achieve impermanence.
 Typically, they require configuring the system to erase itself at boot and

@@ -14,7 +14,7 @@ thoughts. This time, about systems, their delays, and lagging indicators. I
 think they generalize to more than kayaks 🛶, so I wrote about them here.
 
 {:.text-align-center}
-![The Ardèche river, its rocky borders, four kayaks navigating it and an angle of sky.]({% link images/GOPR3224.webp %}){:.centered}
+![The Ardèche river, its rocky borders, four kayaks navigating it and an angle of sky.](../images/GOPR3224.webp){:.centered}
 
 For most of day one (out of two), my kayak partner and I struggled to navigate
 in a straight line. We often found the kayak pointing at the wrong angle and
@@ -25,7 +25,7 @@ low morale.
 _Why_ were we doing such a bad job? Because of _delays_! 
 
 {:.text-align-center}
-![A diagram of a kayak showing the effect of paddling (forward and to the side)]({% link /images/kayak.svg %}){:.centered.inverted}
+![A diagram of a kayak showing the effect of paddling (forward and to the side)](../images/kayak.svg){:.centered.inverted}
 
 A kayak:
 
@@ -71,7 +71,7 @@ fix them. But we were failing, because delays were muddling the effects of our
 inputs and revealing them only after some time (when the kayak turned).
 
 {:.text-align-center}
-![A diagram of a kayak showing how delays and other forces make it harder to predict the effect of paddling.]({% link /images/kayak-delays.svg %}){:.centered.inverted}
+![A diagram of a kayak showing how delays and other forces make it harder to predict the effect of paddling.](../images/kayak-delays.svg){:.centered.inverted}
 
 To get better, we had to first acknowledge that the system was _messier_ than
 what we were trying to picture in our minds. Both delays and external forces

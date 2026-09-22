@@ -5,24 +5,24 @@ tags: [ChromeOS]
 ---
 
 ChromeOS can run Linux containers on a virtual machine, in a system called
-[Crostini][0]. I have recently gone through [a few rabbit holes about it]({%
-link _tag_indexes/ChromeOS.md %}).
+[Crostini][0]. I have recently gone through
+[a few rabbit holes about it](../_tag_indexes/ChromeOS.md).
 
 #### USB security keys
 
 The VM and the containers add a layer of separation from the main operating
 system. That's great from a security point of view! But it limits what one can
-do inside the Linux environment. Specifically, [USB devices need to be
-forwarded]({% link _posts/2025-06-19-nixos-in-crostini.md %}#how-to-usb-forwarding)
+do inside the Linux environment. Specifically,
+[USB devices need to be forwarded](../_posts/2025-06-19-nixos-in-crostini.md#how-to-usb-forwarding)
 to the VM (first) and to the container (next). And, because the VM runs a
 hardened kernel, not all USB devices will work correctly.
 
-After some trial and error, I [managed]({% link
-_posts/2025-06-19-nixos-in-crostini.md %}#how-to-usb-forwarding) to get
-Yubikeys to work reliably in Linux for SSH for authentication and signatures.
-Under the hood, the [`yubikey-agent`]({% link
-_posts/2025-06-26-yubikey-agent.md %}) and the `pcscd (8)` Linux processes
-communicate with the Yubikey through its [PIV
+After some trial and error, I
+[managed](../_posts/2025-06-19-nixos-in-crostini.md#how-to-usb-forwarding) to
+get Yubikeys to work reliably in Linux for SSH for authentication and
+signatures. Under the hood, the
+[`yubikey-agent`](../_posts/2025-06-26-yubikey-agent.md) and the `pcscd (8)`
+Linux processes communicate with the Yubikey through its [PIV
 interface](https://developers.yubico.com/yubico-piv-tool/YubiKey_PIV_introduction.html).
 This does the job well-enough, but has two downsides:
 

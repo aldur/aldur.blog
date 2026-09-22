@@ -72,10 +72,9 @@ uid=501(nixos) gid=20(lp) groups=20(lp)
 
 #### Careful with those backups
 
-A few days after writing this post, I discovered that [`container` bloats Time
-Machine backups]({% link
-_micros/psa-apple-container-bloats-time-machine-backups.md %}). Prevent that by
-excluding its state directory with:
+A few days after writing this post, I discovered that
+[`container` bloats Time Machine backups](../_micros/psa-apple-container-bloats-time-machine-backups.md).
+Prevent that by excluding its state directory with:
 
 ```bash
 tmutil addexclusion ~/Library/Application\ Support/com.apple.container

@@ -13,7 +13,7 @@ tags: [hammerspoon, emoji]
 [updates](https://github.com/aldur/dotfiles/commit/14b11f24a54a0d799f69dcf0da65cb34d15e35a5)
 all the way to [Unicode 15
 emojis](https://unicode.org/emoji/charts-15.0/emoji-released.html) 🪼, it has
-come time to sunset this in favor of the [built-in macOS picker]({% link _micros/sunsetting-my-hammerspoon-emoji-chooser.md  %}).
+come time to sunset this in favor of the [built-in macOS picker](../_micros/sunsetting-my-hammerspoon-emoji-chooser.md).
 
 You will find its last version archived {% include
 github_link.html
@@ -26,13 +26,13 @@ automate things on macOS. Today we'll see how to create an interactive emoji
 search-engine to pick emojis by using their name or a few keywords:
 
 {:.text-align-center}
-![emoji-chooser]({% link /images/emoji-chooser.webp %}){:.centered}
+![emoji-chooser](../images/emoji-chooser.webp){:.centered}
 *Smile and say cheese!*
 
 ## Preliminary setup
 
-To begin, download [this archive]({% link /uploads/emojis.zip %}) and unzip into
-your `~/.hammerspoon` directory. The archive contains a few thousands emojis in
+To begin, download [this archive](../uploads/emojis.zip) and unzip into your
+`~/.hammerspoon` directory. The archive contains a few thousands emojis in
 `PNG` format and a `JSON` file encoding their details. I generated it through
 [this script](https://gist.github.com/aldur/6b591c582db8a9134f31263f95cccfc2).
 

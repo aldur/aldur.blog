@@ -22,10 +22,10 @@ previously running, stop it first with `lxc stop`. You can now start it from
 Terminal.
 
 {:.text-align-center}
-![A screenshot showing the `lxc-nixos` container available in the Terminal application.]({% link images/chromeos-terminal-lxc-nixos.webp %}){:.centered}
+![A screenshot showing the `lxc-nixos` container available in the Terminal application.](../images/chromeos-terminal-lxc-nixos.webp){:.centered}
 _The experimental UI makes it seamless to start and access the container from
 Terminal._
 
 {:.text-align-center}
-![A screenshot showing the `lxc-nixos` container available in the Files application.]({% link images/chromeos-files-lxc-nixos.webp %}){:.centered}
+![A screenshot showing the `lxc-nixos` container available in the Files application.](../images/chromeos-files-lxc-nixos.webp){:.centered}
 _Use Files to browse the container home and mount directories into it._

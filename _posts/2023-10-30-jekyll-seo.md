@@ -21,9 +21,9 @@ can _welcome_ Google's crawlers here by:
 
 [This Google support
 page](https://support.google.com/webmasters/answer/34592?hl=en#zippy=%2Cdomain-property-examplecom)
-shows how add the property. We are using a [Cloudflare Pages']({% post_url
-2023-10-15-migrating-to-cloudflare-pages %}) domain, so we don't control DNS, and
-we will need to create a URL-prefix property.
+shows how add the property. We are using a
+[Cloudflare Pages'](2023-10-15-migrating-to-cloudflare-pages.md) domain, so we
+don't control DNS, and we will need to create a URL-prefix property.
 
 To verify the URL-prefix we need the following snippet within the `<head>` of
 our index:
@@ -108,8 +108,9 @@ little traffic but has not picked up any page in the index yet.
 [^seo-tag]:
     The plugin also makes social information and title/excerpts of posts
     available to search crawlers. The [`minima`
-    theme](https://github.com/jekyll/minima) I am [using]({% post_url
-    2023-10-07-reboot %}) suggests adding it in its default configuration.
+        theme](https://github.com/jekyll/minima) I am
+    [using](2023-10-07-reboot.md) suggests adding it in its default
+    configuration.
 
 [^indexing]:
     In my case, trying to manually request the indexing from the Google Search

@@ -13,10 +13,10 @@ minimal dependencies and moving parts. By building on opensource foundations,
 self-made software typically requires very little maintenance as well.
 
 Then, one day I look back and discover that I have been using that software for
-almost a decade. That is certainly the case for my [Hammerspoon emoji chooser
-on macOS]({% post_url 2016-12-19-hammerspoon-emojis %}), dated December 2016. I
-used it daily on countless chats and only occasionally updated it to support
-new Unicode symbols.
+almost a decade. That is certainly the case for my
+[Hammerspoon emoji chooser on macOS](../_posts/2016-12-19-hammerspoon-emojis.md),
+dated December 2016. I used it daily on countless chats and only occasionally
+updated it to support new Unicode symbols.
 
 At the time, I built it because I could not find an alternative good enough for
 me: with keyboard only navigation, escape to dismiss, quick searching,
@@ -32,7 +32,7 @@ compares pretty nicely to how I set up my emoji chooser, bound to
 <kbd>⌃ Control</kbd> + <kbd>⌥ Option</kbd> + <kbd>⌘ Command</kbd>).
 
 {:.text-align-center}
-![[The built-in macOS emoji picker with the query "hello"]]({% link images/builtin_emoji_picker.webp %}){:.centered style="width: calc(784px/2); height: calc(892px/2);"}
+![[The built-in macOS emoji picker with the query "hello"]](../images/builtin_emoji_picker.webp){:.centered style="width: calc(784px/2); height: calc(892px/2);"}
 _Hello from the built-in macOS picker_
 
 That's why it is (sad) time to sunset my own implementation. When possible, I

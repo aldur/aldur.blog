@@ -106,7 +106,7 @@ takes less to write the HTML code by hand than to script it -- but a Jekyll
 plugin could do that automatically.
 
 {:.text-align-center}
-![This blog has moved, about page]({% link /images/moved.webp %}){:.centered}
+![This blog has moved, about page](../images/moved.webp){:.centered}
 _What the result looks like for our [about][3] page -- try clicking on the link yourself._
 
 #### The RSS feed
@@ -117,7 +117,7 @@ want to notify them. We will create a static new RSS entry that points to the
 new website.
 
 {:.text-align-center}
-![This blog has migrated, RSS entry]({% link /images/rss_migration.webp %}){:.centered}
+![This blog has migrated, RSS entry](../images/rss_migration.webp){:.centered}
 _The [RSS feed entry][4] showing the notification._
 
 <div class="hint" markdown="1">
@@ -147,7 +147,7 @@ You can try the resulting feel [here][5].
 
 <div class="note" markdown="1">
 {:.text-align-center}
-![pages through http-equiv, a custom RSS entry, and JavaScript for anything else]({% link /images/github_to_cloudflare.webp %}){:.centered}
+![pages through http-equiv, a custom RSS entry, and JavaScript for anything else](../images/github_to_cloudflare.webp){:.centered}
 _The redirection plan completed._
 </div>
 

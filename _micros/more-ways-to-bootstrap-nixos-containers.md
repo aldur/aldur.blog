@@ -5,11 +5,11 @@ last_modified_at: 2025-07-26
 tags: [ChromeOS]
 ---
 
-This post extends the [one about NixOS containers in ChromeOS]({% post_url
-2025-06-19-nixos-in-crostini %}) with more ways to deploy an `xlc` container
-image to your host. They might come handy if you cannot access your Tailscale
-network or if you can, but the connection to your image server is proxied and
-results in slow download speed.
+This post extends the
+[one about NixOS containers in ChromeOS](../_posts/2025-06-19-nixos-in-crostini.md)
+with more ways to deploy an `xlc` container image to your host. They might come
+handy if you cannot access your Tailscale network or if you can, but the
+connection to your image server is proxied and results in slow download speed.
 
 <!--NOTE: If you change this, also change the anchor in the main NixOS on ChromeOS post. -->
 ### From an LXD image server behind Tailscale

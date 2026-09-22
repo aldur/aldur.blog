@@ -6,9 +6,9 @@ excerpt: >
 tags: [ChromeOS]
 ---
 
-With [NixOS containers in ChromeOS]({% link
-_posts/2025-06-19-nixos-in-crostini.md %}), I use an SSH key in a Yubikey to
-authenticate to remote hosts and keep the key separated from the container.
+With [NixOS containers in ChromeOS](2025-06-19-nixos-in-crostini.md), I use an
+SSH key in a Yubikey to authenticate to remote hosts and keep the key separated
+from the container.
 
 Creating keys on the Yubikey and ensuring good UX while using them can be
 tricky, but [`yubikey-agent`][0] makes it seamless. There's a catch though! It

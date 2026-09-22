@@ -2,9 +2,9 @@
 title: 'Jekyll + Nix'
 ---
 
-When I [started writing again]({% post_url 2023-10-07-reboot %}), getting this
-blog to rebuild with [Jekyll](https://jekyllrb.com) wasn't easy. Let's fix that
-with [Nix](https://nixos.org).
+When I [started writing again](2023-10-07-reboot.md), getting this blog to
+rebuild with [Jekyll](https://jekyllrb.com) wasn't easy. Let's fix that with
+[Nix](https://nixos.org).
 
 ### Building with Jekyll
 
@@ -62,7 +62,7 @@ consume.
 
 <div class="note" markdown="1">
 {:.text-align-center}
-![Gemfile → Gemfile.lock → gemset.nix]({% link /images/gems.webp %}){:.centered}
+![Gemfile → Gemfile.lock → gemset.nix](../images/gems.webp){:.centered}
 _Getting dependencies, versions and hashes._
 </div>
 
@@ -147,12 +147,12 @@ That we need to know about, manage, evaluate.
 
 <div class="note" markdown="1">
 {:.text-align-center}
-![OS, nix, bundix, bundler, jekyll, this blog]({% link /images/stack.webp %}){:.centered}
+![OS, nix, bundix, bundler, jekyll, this blog](../images/stack.webp){:.centered}
 _The reproducible (but more complex) stack now powering this blog._
 </div>
 
-Back to a [product mindset]({% post_url 2023-10-07-zap-it %}) how do we weigh
-benefits and costs? Luckily, we don't!
+Back to a [product mindset](2023-10-07-zap-it.md) how do we weigh benefits and
+costs? Luckily, we don't!
 
 I am not at work™, I am doing this for fun. Plus, I get to rant about it.
 

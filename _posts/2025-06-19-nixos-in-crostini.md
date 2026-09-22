@@ -100,9 +100,8 @@ and signing (e.g., `git commit`) from the shell.
 
 <div class="hint" markdown="1">
 
-  If you are looking for containerless VMs, [this post implements the same
-  approach for `baguette`]({% post_url
-  2025-10-29-nixos-baguette-images-in-chromeos %}).
+  If you are looking for containerless VMs,
+  [this post implements the same approach for `baguette`](2025-10-29-nixos-baguette-images-in-chromeos.md).
 
 </div>
 
@@ -157,15 +156,16 @@ that makes it work by running `garcon` and `sommelier` through
 `systemd`. The ChromeOS source code and the `cros-container-guest-tools-git`
 [AUR package][11] were invaluable in making this happen.
 
-After you import this module in your configuration and build the image,
-the next step is to get it on your Chromebook. There are [a few ways]({% link
-_micros/more-ways-to-bootstrap-nixos-containers.md %}) to do this, including
-building it in the default Debian container, copying it over through a USB
-stick, and uploading it to Drive.
+After you import this module in your configuration and build the image, the
+next step is to get it on your Chromebook. There are
+[a few ways](../_micros/more-ways-to-bootstrap-nixos-containers.md) to do this,
+including building it in the default Debian container, copying it over through
+a USB stick, and uploading it to Drive.
 
-If you have another NixOS instance handy, you can push it to an [LXD image server][12]
-[behind Tailscale]({% link _micros/more-ways-to-bootstrap-nixos-containers.md
-%}/#from-an-lxd-image-server-behind-tailscale). To do that, first enable `lxd`:
+If you have another NixOS instance handy, you can push it to an [LXD image
+server][12]
+[behind Tailscale](../_micros/more-ways-to-bootstrap-nixos-containers.md#from-an-lxd-image-server-behind-tailscale).
+To do that, first enable `lxd`:
 
 ```nix
 virtualisation.lxd.enable = true;
@@ -200,8 +200,8 @@ vmc start termina
 
 If you are using an image server behind Tailscale, install the Tailscale app
 from the Play Store and use the hardware key to authenticate. Otherwise, follow
-one of the approaches described [here to deploy the image to the Chromebook]({% link
-_micros/more-ways-to-bootstrap-nixos-containers.md %}).
+one of the approaches described
+[here to deploy the image to the Chromebook](../_micros/more-ways-to-bootstrap-nixos-containers.md).
 
 From inside `termina`:
 
@@ -305,8 +305,7 @@ nix run nixpkgs#xorg.xeyes
 <div class="admonition" markdown="1">
 
 ChromeOS 141 unfortunately deprecates the `#crostini-multi-container` flag that
-[allowed to manage multiple containers through the UI]({% link
-_micros/multiple-crostini-containers.md %}).
+[allowed to manage multiple containers through the UI](../_micros/multiple-crostini-containers.md).
 
 Integrating `lxc-nixos` with "Terminal" now requires replacing the original
 Debian container.
@@ -387,8 +386,8 @@ fail and looking at `/var/log/messages` would show this message: `Verdict for
 </div>
 
 In the container, `lsusb` should show the device as ready for use. If you
-[configured it for SSH authentication]({% link
-_posts/2025-06-26-yubikey-agent.md %}), `ssh-add -L` should show your keys.
+[configured it for SSH authentication](2025-06-26-yubikey-agent.md), `ssh-add
+-L` should show your keys.
 
 If `lsusb` detects the device, but the hardware key does not work when queried
 for keys (e.g., with `ssh-add -L`), restart the `pcscd` service and try again.
@@ -400,10 +399,10 @@ built-in Terminal application. Use the container's IP (`ip addr show`) or the
 domain `lxc-nixos.termina.linux.test` (this is hit or miss, sometimes
 `cicerone` will not correctly detect the IP and the hostname won't resolve).
 
-[Getting SSH from ChromeOS to work]({% link
-_micros/ssh-from-chromeos-terminal.md %}) required me to jump through so many
-hoops that the effort is not worth the result. I do not recommend it, but I have
-left this note in case it is useful to you.
+[Getting SSH from ChromeOS to work](../_micros/ssh-from-chromeos-terminal.md)
+required me to jump through so many hoops that the effort is not worth the
+result. I do not recommend it, but I have left this note in case it is useful
+to you.
 
 <div class="admonition" markdown="1">
 
@@ -415,9 +414,8 @@ using it.
 
 #### How-to: Root login
 
-I either [SSH as `root` or use `lxc exec`]({% link
-_posts/2025-06-27-yubikey-root-login.md %}) to escalate privileges easily and
-safely.
+I either [SSH as `root` or use `lxc exec`](2025-06-27-yubikey-root-login.md) to
+escalate privileges easily and safely.
 
 ## Conclusion
 
@@ -451,10 +449,9 @@ Thanks for reading, and 'til next time! 👋
 <div class="hint" markdown="1">
 
   The ChromiumOS team is experimenting with a way (codename `baguette`) to run
-  containerless VM images. [This post describes how to use the approach
-  described here to build NixOS `baguette` images]({% post_url
-  2025-10-29-nixos-baguette-images-in-chromeos %}). Give it a try and let me
-  know how it works for you!
+  containerless VM images.
+  [This post describes how to use the approach described here to build NixOS `baguette` images](2025-10-29-nixos-baguette-images-in-chromeos.md).
+  Give it a try and let me know how it works for you!
 
 </div>
 

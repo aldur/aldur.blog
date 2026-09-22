@@ -19,7 +19,7 @@ SVGs directly. Plus, I can now scratch another hitch I had: adjusting
 figure colors based on the client's theme. The image below shows what I mean:
 
 {:.text-align-center}
-![The text "Hello, vector world!", displaying in black on a light theme and in white on a dark theme.]({% link images/hello_vector_world.svg %}){:.centered.inverted}
+![The text "Hello, vector world!", displaying in black on a light theme and in white on a dark theme.](../images/hello_vector_world.svg){:.centered.inverted}
 _Go ahead and change the theme by clicking on the header icon. This image will automatically switch colors as well._
 
 Under the hood, this CSS filter does its magic, inverting the SVG colors on a dark theme.

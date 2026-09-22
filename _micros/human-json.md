@@ -3,9 +3,9 @@ title: 'human.json'
 date: 2026-03-20
 ---
 
-As a small addition to my longer post about [human voices]({%- post_url
-2026-03-20-human-voices -%}), I just added a small Jekyll plugin that generates
-a [`/human.json` file](/human.json).
+As a small addition to my longer post about
+[human voices](../_posts/2026-03-20-human-voices.md), I just added a small
+Jekyll plugin that generates a [`/human.json` file](/human.json).
 
 From the [`human.json` protocol][0]:
 

@@ -357,7 +357,7 @@ In this scenario the weighted average payoff for hawks decreases to 15.625 (from
 How does it change according to the frequency of hawks in the population?
 
 {:.text-align-center}
-![frequency of hawks and doves in the population against weighted average payoff]({% link /images/hawks_by_frequency.svg %}){:.centered}
+![frequency of hawks and doves in the population against weighted average payoff](../images/hawks_by_frequency.svg){:.centered}
 _Frequency of hawks and doves in the population against weighted average payoff._
 
 The weighted average payoffs of the two species intersect! And as it often
@@ -481,7 +481,7 @@ for i in range(n_generations):
 Here is the plot resulting from a run of the simulation.
 
 {:.text-align-center}
-![frequency of hawks and doves in the population as generations evolve]({% link /images/hawks_by_generation.svg %}){:.centered}
+![frequency of hawks and doves in the population as generations evolve](../images/hawks_by_generation.svg){:.centered}
 _Frequency of hawks and doves in each generation, as they evolve._
 
 This particular simulation took less than 10 generations to reach the ESS,

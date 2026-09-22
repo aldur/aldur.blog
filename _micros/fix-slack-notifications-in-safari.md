@@ -12,7 +12,7 @@ prompt to allow that in the first place: `app.slack.com` was missing from the
 settings, both in Safari and in macOS' notification center.
 
 {:.text-align-center}
-![A screenshot from the Slack troubleshooting guide for Safari]({% link /images/safari-troubleshoot.webp %}){:.centered style="width: 70%; border-radius: 10px;"}
+![A screenshot from the Slack troubleshooting guide for Safari](../images/safari-troubleshoot.webp){:.centered style="width: 70%; border-radius: 10px;"}
 _Slack's troubleshooting guide for Safari._
 
 To fix it, I manually requested the permission to show notifications from the

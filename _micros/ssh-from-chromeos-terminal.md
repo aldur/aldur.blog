@@ -32,8 +32,9 @@ to pick `nassh` through the `--ssh-client-version=pnacl` relay server
 
 #### Yubikey support
 
-Now things get messy. I generate my [SSH identities on a Yubikey]({% link
-_posts/2025-06-26-yubikey-agent.md %}). Terminal and Secure Shell
+Now things get messy. I generate my
+[SSH identities on a Yubikey](../_posts/2025-06-26-yubikey-agent.md). Terminal
+and Secure Shell
 [support](https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/hardware-keys.md)
 Yubikeys thanks to the [Smart Card
 Connector](https://chromewebstore.google.com/detail/smart-card-connector/khpfeaanjngmcnplbdlpegiifgpfgdco)
@@ -43,7 +44,7 @@ Unfortunately, `wassh` never worked for me on this configuration, failing with
 the following error:
 
 {:.text-align-center}
-![A screenshot of the Terminal application failing to establish an SSH connection.]({% link images/failing-ssh-chromeos.webp %}){:.centered}
+![A screenshot of the Terminal application failing to establish an SSH connection.](../images/failing-ssh-chromeos.webp){:.centered}
 > _Program exited with status code [object Object]._
 
 For a while, I could work around the issue by using the old SSH client through

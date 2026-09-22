@@ -40,7 +40,7 @@ terminal is [indeed complicated][2].
 Mystery solved! Here the behavior in action:
 
 {:.text-align-center}
-![A terminal screencast showing how pipes break completion]({% link /images/pipes.svg %}){:.centered}
+![A terminal screencast showing how pipes break completion](../images/pipes.svg){:.centered}
 Also on [asciinema][1]
 
 [0]: https://github.com/python/cpython/blob/71ae93374defd192e5e88fe0912eff4f8e56f286/Parser/myreadline.c#L2
