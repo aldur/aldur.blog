@@ -1,7 +1,7 @@
-<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
-<link rel="icon" type="image/png" href="/assets/images/favicon-48x48.png" sizes="48x48" />
-<link rel="shortcut icon" href="/assets/images/favicon.ico" />
-<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png" />
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
+<link rel="icon" type="image/png" href="{{ '/assets/images/favicon-48x48.png' | relative_url }}" sizes="48x48" />
+<link rel="shortcut icon" href="{{ '/assets/images/favicon.ico' | relative_url }}" />
+<link rel="apple-touch-icon" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}" />
 <meta name="apple-mobile-web-app-title" content="{{ site.short_title | default: site.title }}" />
 
 <meta name="theme-color" content="">
@@ -22,14 +22,14 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
 
-<link rel="manifest" href="/assets/site.webmanifest" />
+<link rel="manifest" href="{{ '/assets/site.webmanifest' | relative_url }}" />
 
 {%- if site.author and site.author.pgp_pk_url %}
 <link rel="pgpkey" href="{{ site.author.pgp_pk_url }}">
 <link rel="authorization_endpoint" href="https://indieauth.com/auth">
 {%- endif %}
 
-<link rel="human-json" href="/human.json">
+<link rel="human-json" href="{{ '/human.json' | relative_url }}">
 
 {%- if page.date %}
 {%- if page.last_modified_at %}

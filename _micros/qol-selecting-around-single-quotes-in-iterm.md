@@ -8,7 +8,7 @@ excerpt: >
 
 <div class="video-container">
   <video class="responsive-video" autoplay="autoplay" loop="loop">
-    <source src="/uploads/iTerm_single_quotes.webm" type="video/webm">
+    <source src="{% link uploads/iTerm_single_quotes.webm %}" type="video/webm">
     Your browser does not support the video tag.
   </video>
   <p class="video-caption" markdown="1">

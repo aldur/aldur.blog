@@ -156,7 +156,6 @@
           OG_RENDER_SCRIPT = "${ogRenderer}/og-render.mjs";
           buildPhase = ''
             unset BUNDLE_PATH
-            ${jekyllEnv}/bin/bundler exec -- ruby test/relative_links_test.rb
             ${jekyllEnv}/bin/bundler exec -- jekyll build ${jekyllArgs};
             mkdir $out;
             mv _site $out;
@@ -189,9 +188,8 @@
         };
       in
       {
-        checks = {
-          jekyll-build = buildJekyll;
-          default = buildJekyll;
+        checks = import ./test/tests.nix {
+          inherit pkgs buildJekyll jekyllEnv;
         };
 
         packages = {
