@@ -112,9 +112,8 @@ in `_posts/`:
 [About, from anywhere](/pages/about.md)
 ```
 
-Reference-style links and `#section` anchors work too. Keep local link text and
-destinations on one line so the plugin can rewrite them. For generated URLs
-such as `/feed.xml`, use `{{ '/feed.xml' | relative_url }}`.
+Reference-style links and `#section` anchors work too. For generated URLs such
+as `/feed.xml`, use `{{ '/feed.xml' | relative_url }}`.
 
 [0]: https://jekyllrb.com
 [1]: https://nixos.org

@@ -7,6 +7,7 @@ require "tmpdir"
 require "fileutils"
 require "open3"
 require "bundler"
+require_relative "../_plugins/relative_links_multiline"
 
 ROOT = File.expand_path("..", __dir__)
 CHECKER = File.join(__dir__, "check_rendered_links.py")
@@ -28,8 +29,7 @@ def check_preview(destination)
 end
 
 Dir.mktmpdir("rendered-links-") do |temporary|
-  # Exercise the actual Markdown/Liquid pipeline, including the gem's wrapped
-  # link bug. These failures must be detected by the rendered-output checker.
+  # Exercise the actual Markdown/Liquid pipeline, including wrapped links.
   fixture = File.join(temporary, "fixture")
   FileUtils.mkdir_p(File.join(fixture, "_posts"))
   File.write(File.join(fixture, "target.md"), "---\npermalink: /target/\n---\n# Heading\n")
@@ -41,7 +41,8 @@ Dir.mktmpdir("rendered-links-") do |temporary|
     "[Valid](../target.md#heading)" => nil,
     "[Relative](../../../target/#heading)" => nil,
     "[Same page](#source)" => nil,
-    "[Wrapped\nlink](../target.md)" => "missing the expected",
+    "[Wrapped\nlink](../target.md#heading)" => nil,
+    "[Wrapped destination](\n../target.md#heading\n)" => nil,
     "[Missing](#{BASEURL}/missing.html)" => "missing.html",
     "[Anchor](../target.md#absent)" => "absent",
     "![Missing](#{BASEURL}/missing.png)" => "missing.png",

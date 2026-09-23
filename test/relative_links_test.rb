@@ -4,6 +4,7 @@
 require "jekyll"
 require "tmpdir"
 require "fileutils"
+require_relative "../_plugins/relative_links_multiline"
 require_relative "../_plugins/strict_relative_links"
 
 site_config = File.expand_path("../_config.yml", __dir__)
@@ -21,6 +22,7 @@ Dir.mktmpdir("relative-links-") do |root|
     write.call("_includes/link.html", '[Included](../pages/about.md)')
     write.call("_includes/broken.html", '[Missing](missing.md)')
     write.call("downloads/source.md", "Downloadable Markdown without front matter")
+    write.call("images/example.svg", '<svg xmlns="http://www.w3.org/2000/svg"/>')
     write.call("_posts/2020-01-02-hidden.md", "---\npublished: false\n---\nHidden")
     write.call("excluded.md", "---\n---\nExcluded")
 
@@ -31,6 +33,18 @@ Dir.mktmpdir("relative-links-") do |root|
       [Page](../pages/about.md#heading)
       [Collection](../_tag_indexes/example.md)
       [Root](/pages/about.md)
+      [Wrapped
+      post](../_posts/2020-01-01-target.md#heading)
+      [Wrapped destination](
+        /pages/about.md#heading
+      )
+
+      [An unresolved reference]
+
+      ![Wrapped
+      image](/images/example.svg)
+      [Wrapped
+      reference][about]
       [Reference][about]
       [External](https://example.com/missing.md)
       [Protocol relative](//example.com/missing.md)
@@ -68,15 +82,18 @@ Dir.mktmpdir("relative-links-") do |root|
         { "Post" => "/custom/", "Micro" => "/micros/2020/01/02/target/",
           "Page" => "/about/#heading", "Collection" => "/tags/example.html",
           "Root" => "/about/", "Reference" => "/about/", "Liquid" => "/custom/",
+          "Wrapped post" => "/custom/#heading", "Wrapped destination" => "/about/#heading",
+          "Wrapped reference" => "/about/",
           "Download" => "/downloads/source.md?raw=1#heading" }.each do |label, url|
           expected = %(<a href="#{baseurl}#{url}">#{label}</a>)
-          raise "Incorrect #{label} link in #{document.relative_path}" unless document.output.include?(expected)
+          raise "Incorrect #{label} link in #{document.relative_path}" unless document.output.gsub(/\s+/, " ").include?(expected)
         end
+        raise "Incorrect wrapped image" unless document.output.include?(%(src="#{baseurl}/images/example.svg"))
       end
     end
 
     sources.each do |source|
-      ["[Missing](missing.md)", "[Missing][ref]\n\n[ref]: missing.md",
+      ["[Missing](missing.md)", "[Missing\nlink](missing.md)", "[Missing][ref]\n\n[ref]: missing.md",
        "[Hidden](../_posts/2020-01-02-hidden.md)", "[Excluded](/excluded.md)",
        "[Missing](missing.markdown#heading)", "[Missing](missing.md?raw=1)",
        "[Encoded](missing%2Emd)", "{% include broken.html %}",
