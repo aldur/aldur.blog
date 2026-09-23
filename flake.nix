@@ -156,6 +156,7 @@
           OG_RENDER_SCRIPT = "${ogRenderer}/og-render.mjs";
           buildPhase = ''
             unset BUNDLE_PATH
+            ${nodejs}/bin/node --test bin/og-render.test.mjs
             ${jekyllEnv}/bin/bundler exec -- jekyll build ${jekyllArgs};
             mkdir $out;
             mv _site $out;

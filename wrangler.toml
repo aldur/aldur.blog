@@ -1,0 +1,8 @@
+name = "aldur"
+pages_build_output_dir = "./_site"
+compatibility_date = "2026-09-22"
+
+# Applied before Cloudflare installs Ruby; setting these in the build script
+# would be too late. These defaults apply to both production and previews.
+[vars]
+RUBY_CONFIGURE_OPTS = "--disable-install-doc --disable-yjit"
