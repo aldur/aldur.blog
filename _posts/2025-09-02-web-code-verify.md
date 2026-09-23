@@ -164,12 +164,12 @@ without triggering a new login notification.
 
 Due to all this, I consider web-apps a better fit for a majority of users
 (myself included), especially when used through a thin client (e.g., a
-[Chromebook]({% link _posts/2025-06-19-nixos-in-crostini.md %})). Encouraging
-users _not_ to download and install native software makes device compromise
-less likely and _localizes_ the blast radius (e.g., to the specific compromised
-app). Isolated Web Apps (or similar) will be a welcome addition once they
-standardize, adding one more layer of protection to the web. Meanwhile, the
-Code Verify extension probably doesn't hurt the services it covers.
+[Chromebook](2025-06-19-nixos-in-crostini.md)). Encouraging users _not_ to
+download and install native software makes device compromise less likely and
+_localizes_ the blast radius (e.g., to the specific compromised app). Isolated
+Web Apps (or similar) will be a welcome addition once they standardize, adding
+one more layer of protection to the web. Meanwhile, the Code Verify extension
+probably doesn't hurt the services it covers.
 
 Threat modeling is not one-size-fits-all, though, and each user should think
 carefully about what they are protecting from. For instance, if you are a

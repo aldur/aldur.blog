@@ -37,9 +37,8 @@ would take. This post describes the results.
 ## Background: ChromeOS VMs
 
 Under the hood, ChromeOS runs VMs through [`crosvm`][1], a hardened virtual
-machine monitor. We already met it when [investigating FIDO2 support in Linux
-ChromeOS guests]({% link _micros/fido2-almost-works-in-linux-on-chromeos.md
-%}).
+machine monitor. We already met it when
+[investigating FIDO2 support in Linux ChromeOS guests](../_micros/fido2-almost-works-in-linux-on-chromeos.md).
 
 Crostini used `crosvm` to run a stripped-down VM called [`termina`][2] that
 booted quickly to run the user's containers. It also did a few more things:
@@ -50,12 +49,12 @@ booted quickly to run the user's containers. It also did a few more things:
 1. It handled the lifecycle of the VM and of its processes through
    [`maitred`][4].
 
-The [default Baguette image][7] is based on Debian and replicates all this.
-In addition, it configures the VM to run `garcon` and `sommelier` (in Crostini
-they [run within the container]({% post_url 2025-06-19-nixos-in-crostini
-%}#nixos-containers)) to provide URI handling, file browsing, and X/Wayland
-forwarding: all those things that make Crostini/Baguette seamless to use
-on ChromeOS.
+The [default Baguette image][7] is based on Debian and replicates all this. In
+addition, it configures the VM to run `garcon` and `sommelier` (in Crostini
+they
+[run within the container](2025-06-19-nixos-in-crostini.md#nixos-containers))
+to provide URI handling, file browsing, and X/Wayland forwarding: all those
+things that make Crostini/Baguette seamless to use on ChromeOS.
 
 ## Baguette NixOS images
 
@@ -65,10 +64,10 @@ library path. Luckily, we won't need to worry about that: `crosvm-tools`
 include their own libraries and dynamic linker, so they run without issues in
 NixOS.
 
-When we built [NixOS LXC images for Crostini]({% post_url
-2025-06-19-nixos-in-crostini %}), we learned how to run `garcon` and
-`sommelier` at user login. To enable support for `crosvm-tools`, `vshd`, and
-`maitred` as well, I added their `systemd` unit definitions.
+When we built [NixOS LXC images for Crostini](2025-06-19-nixos-in-crostini.md),
+we learned how to run `garcon` and `sommelier` at user login. To enable support
+for `crosvm-tools`, `vshd`, and `maitred` as well, I added their `systemd` unit
+definitions.
 
 Booting the VM requires a compressed BTRFS image [built from a rootfs
 tarball][10]. To build the tarball through a Nix derivation, I took a page from
@@ -129,7 +128,7 @@ result, showing a `baguette-nixos` VM correctly forwarding a Wayland session to
 ChromeOS.
 
 {:.text-align-center}
-![A screenshot showing the `baguette-nixos` VM running Featherpad]({% link images/baguette.webp %}){:.centered}
+![A screenshot showing the `baguette-nixos` VM running Featherpad](../images/baguette.webp){:.centered}
 _Wayland forwarding working in a Baguette VM._
 
 ### How-to: Make it yours
@@ -190,9 +189,9 @@ That's it!
 #### How-to: USB forwarding with `crosh`
 
 If you want more control and prefer to enable USB forwarding through `crosh`,
-Baguette [simplifies the LXC approach]({% link
-_posts/2025-06-19-nixos-in-crostini.md %}#how-to-usb-forwarding) because it
-doesn't need a container name.
+Baguette
+[simplifies the LXC approach](2025-06-19-nixos-in-crostini.md#how-to-usb-forwarding)
+because it doesn't need a container name.
 
 Insert the device and then navigate to `chrome://usb-internals`. In the
 `devices` tab, note the Bus number and Port number of your device.
@@ -211,10 +210,10 @@ The Debian image allows passwordless `sudo`. The default NixOS configuration in
 `nixos-crostini` replicates the approach, so that you can escalate
 privileges to rebuild your configuration from within the VM.
 
-I prefer to disable passwordless `sudo` and instead [SSH as `root`]({% link
-_posts/2025-06-27-yubikey-root-login.md %}). This way, I can use a hardware key
-to prove my physical presence, while an attacker cannot automatically escalate
-privileges.
+I prefer to disable passwordless `sudo` and instead
+[SSH as `root`](2025-06-27-yubikey-root-login.md). This way, I can use a
+hardware key to prove my physical presence, while an attacker cannot
+automatically escalate privileges.
 
 ### How-to: Additional `crosh` shell sessions
 
@@ -240,15 +239,14 @@ post from Baguette, and I couldn't tell the difference from legacy Crostini.
 I don't run Kubernetes (which seems to be one of the biggest pain points for LXC
 users), but Baguette improves a few things for me as well:
 
-1. Besides automatically forwarding USB devices, Baguette does [not hold an
-   exclusive lock]({% link _micros/fido2-almost-works-in-linux-on-chromeos.md
-   %}) on USB hardware keys, so I can use them _both_ in Baguette and in
-   ChromeOS (as a passkey) at the same time without having to fiddle with
-   `crosh`.
+1. Besides automatically forwarding USB devices, Baguette does
+   [not hold an exclusive lock](../_micros/fido2-almost-works-in-linux-on-chromeos.md)
+   on USB hardware keys, so I can use them _both_ in Baguette and in ChromeOS
+   (as a passkey) at the same time without having to fiddle with `crosh`.
 1. A containerless VM has better access to the underlying hardware and better
    control of its `init`. This might make it easier to implement [ephemeral
-   storage][18] and seems to fix an issue with [`pcscd`][20] that would make
-   it stop interacting with Yubikeys after a while, until restarted.
+   storage][18] and seems to fix an issue with [`pcscd`][20] that would make it
+   stop interacting with Yubikeys after a while, until restarted.
 
 Thanks for reading, and 'til next time! 👋
 

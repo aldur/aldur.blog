@@ -116,7 +116,7 @@ _[Caveats][caveats]_. Lesson learned!
 >
 > - Use Nix (or Nix-aware) tooling to produce the output hash.
 > - When changing any fetcher parameters, always update the output hash.
->   Use one of the methods from [the section called "Updating source hashes"](#sec-pkgs-fetchers-updating-source-hashes).
+>   Use one of the methods from [the section called "Updating source hashes"](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-fetchers-updating-source-hashes).
 >   Otherwise, existing store objects that match the output hash will be re-used rather than fetching new content.
 
 

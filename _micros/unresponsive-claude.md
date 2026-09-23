@@ -18,7 +18,7 @@ For a bit of context: I only run `claude-code` within VMs or containers. On
 this occasion, it was running inside a QEMU VM built through
 [nixos-generators](https://github.com/nix-community/nixos-generators) with the
 `vm-nogui` format. The unresponsiveness was only manifesting there, not within
-[LXC containers]({% post_url 2025-06-19-nixos-in-crostini %}).
+[LXC containers](../_posts/2025-06-19-nixos-in-crostini.md).
 
 Running Claude with `--debug` wasn't very helpful but sometimes would show some
 error logs about a resize script and the following error:

@@ -189,9 +189,8 @@
         };
       in
       {
-        checks = {
-          jekyll-build = buildJekyll;
-          default = buildJekyll;
+        checks = import ./test/tests.nix {
+          inherit pkgs buildJekyll jekyllEnv;
         };
 
         packages = {

@@ -113,10 +113,10 @@ equal (and with lots of "ifs" and caveats) individuals would get an evolutionary
 advantage against the others, eventually outgrowing them.
 
 Taken to the extreme, edited individuals might develop into an entirely new
-subspecies, with different (better) [individual fitness]({% post_url
-2023-10-27-do-the-evolution %}). Eventually, the two species might reach an
-equilibrium, or one (most likely the new one) could push the other into
-oblivion.
+subspecies, with different (better)
+[individual fitness](2023-10-27-do-the-evolution.md). Eventually, the two
+species might reach an equilibrium, or one (most likely the new one) could push
+the other into oblivion.
 
 Regardless of oblivion, after a few generations the original wealthy minority
 has now become a majority of gene-edited individuals. Such an outcome has

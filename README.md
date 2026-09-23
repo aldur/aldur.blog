@@ -98,6 +98,23 @@ template change). Use `nix develop .#full` (which includes `pnpm`) to refresh
 [Minima's][4] default color follows the user's system preference (light/dark).
 The toggle icon overrides it.
 
+### Links
+
+Ordinary Markdown links to files convert to Jekyll URLs through
+`jekyll-relative-links`. Paths are relative to the file containing the link, or
+relative to the source root when they start with `/`. For example, from a post
+in `_posts/`:
+
+```markdown
+[Another post](2023-10-07-reboot.md)
+[A micro](../_micros/configuring-jekyll-for-cloudflare-pages-previews.md)
+[About](../pages/about.md)
+[About, from anywhere](/pages/about.md)
+```
+
+Reference-style links and `#section` anchors work too. For generated URLs such
+as `/feed.xml`, use `{{ '/feed.xml' | relative_url }}`.
+
 [0]: https://jekyllrb.com
 [1]: https://nixos.org
 [2]: https://nixos.wiki/wiki/Flakes

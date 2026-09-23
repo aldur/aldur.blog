@@ -3,9 +3,10 @@ title: 'PSA: Apple container bloats Time Machine backups'
 date: 2026-06-18
 ---
 
-After [playing with Apple container]({% post_url
-2026-06-11-nixos-for-apple-container %}), my Time Machine backups started
-failing with the error: "The backup disk is full".
+After
+[playing with Apple container](../_posts/2026-06-11-nixos-for-apple-container.md),
+my Time Machine backups started failing with the error: "The backup disk is
+full".
 
 On that particular Mac, the disk is 2TB and I am only allocating 1.5TB to Time
 Machine over Samba. That's why the error isn't particularly surprising at first
@@ -22,7 +23,7 @@ Inventory X][0] at it to take a look at what was eating my backup space. Here's
 the result:
 
 {:.text-align-center}
-![A Disk Inventory X screenshot showing the `snapshot` directory of `com.apple.container` taking more than 500GB of space]({% link images/disk-inventory-x.webp %}){:.centered style="width: 70%; border-radius: 10px;"}
+![A Disk Inventory X screenshot showing the `snapshot` directory of `com.apple.container` taking more than 500GB of space](../images/disk-inventory-x.webp){:.centered style="width: 70%; border-radius: 10px;"}
 _The whole backup is about 540GB, of which 524GB are from `container/snapshot`._
 
 I later found [issue #404 in the `container` repository][1], where multiple

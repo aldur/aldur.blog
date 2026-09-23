@@ -16,9 +16,9 @@ the table.
 
 To me, good sales boil down to mutual _wins_. A good salesman will figure out
 what the other party needs, a way to provide it at a fair price, and manage
-expectations, while avoiding deception and the [psychological biases]({% link
-_posts/2025-09-08-nuggets-of-psychology.md %}) that trap both buyers and
-sellers.
+expectations, while avoiding deception and the
+[psychological biases](2025-09-08-nuggets-of-psychology.md) that trap both
+buyers and sellers.
 
 A corresponding section of the book describes a few down-to-earth habits to
 become more effective at sales. I found them particularly valuable because they

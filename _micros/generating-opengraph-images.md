@@ -11,7 +11,7 @@ The most noticeable improvement comes from `og:image`, which adds an image on
 top of the page title:
 
 {:.text-align-center}
-![An image with this blog's name and this post's title, plus the greek letter mu and the site URL]({% link /images/og/micros-2026-03-21-generating-opengraph-images.webp %}){:.centered style="width: 70%; border-radius: 10px;"}
+![An image with this blog's name and this post's title, plus the greek letter mu and the site URL](../images/og/micros-2026-03-21-generating-opengraph-images.webp){:.centered style="width: 70%; border-radius: 10px;"}
 _The OpenGraph image for this post._
 
 Ideally, I'd dynamically generate all images when running `jekyll build`.

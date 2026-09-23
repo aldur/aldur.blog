@@ -3,11 +3,11 @@ title: 'MLX with Metal support through Nix'
 date: 2025-11-04 22:48
 ---
 
-We have [talked about]({% link _micros/unlimited-tokens-with-llm-mlx.md %}) how
-I like running local models on macOS through the [MLX framework][0]: it is
-_fast_ and it doesn't require an `ollama` daemon in the background.
-[`simonw/llm`][1] provides good CLI ergonomics (for instance, to provide
-examples, set a system prompt, temperature, etc.).
+We have [talked about](unlimited-tokens-with-llm-mlx.md) how I like running
+local models on macOS through the [MLX framework][0]: it is _fast_ and it
+doesn't require an `ollama` daemon in the background. [`simonw/llm`][1]
+provides good CLI ergonomics (for instance, to provide examples, set a system
+prompt, temperature, etc.).
 
 I also like my pipelines deterministic so that upstream releases don't break
 them by mistake. For this, I use Nix to package things up.

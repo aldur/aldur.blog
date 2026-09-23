@@ -4,8 +4,8 @@ date: 2026-03-22
 tags: [ChromeOS]
 ---
 
-When running [NixOS in ChromeOS]({%- link _tag_indexes/ChromeOS.md -%}), I use
-Tailscale to access a few remote hosts.
+When running [NixOS in ChromeOS](../_tag_indexes/ChromeOS.md), I use Tailscale
+to access a few remote hosts.
 
 Although Tailscale can run within the VM itself, I prefer to run its Android
 app in ChromeOS. This way, the VM never sees the raw Tailscale credentials and,

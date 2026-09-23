@@ -9,8 +9,7 @@ I recently started using
 text accounting](https://plaintextaccounting.org). This post describes my
 approach around it and my `nvim` setup.
 
-![A scene of double-entry bookkeeping reimagined in a vibrant cyberpunk setting
--- DALL·E]({% link /images/cyberpunk_ledger.webp %}){:.centered}
+![A scene of double-entry bookkeeping reimagined in a vibrant cyberpunk setting -- DALL·E](../images/cyberpunk_ledger.webp){:.centered}
 
 <div class="hint" markdown="1">
 📒 Understanding why Beancount might be useful requires making sense of

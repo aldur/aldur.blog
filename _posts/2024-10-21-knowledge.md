@@ -75,11 +75,11 @@ slight variation. Those surviving will be tomorrow's genes.
 
 #### Good design
 
-Evolution's and design's feedback loop work the same. Working across generations
-takes much longer than designing -- producing -- evaluating prototypes (e.g., in
-Agile or lean developments). Eventually, both processes will land to the same
-result: designs that are
-[very hard to vary without compromising their function]({% post_url 2023-10-27-do-the-evolution %}).
+Evolution's and design's feedback loop work the same. Working across
+generations takes much longer than designing -- producing -- evaluating
+prototypes (e.g., in Agile or lean developments). Eventually, both processes
+will land to the same result: designs that are
+[very hard to vary without compromising their function](2023-10-27-do-the-evolution.md).
 
 That is what I like to think of as "good design". One hard to vary, with the
 right mix of required knowledge in the head and in the world[^magic]. "Good

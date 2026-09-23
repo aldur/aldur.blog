@@ -17,5 +17,5 @@ notify-send --app-name="baguette-nixos" "Hello, ChromeOS!"
 ```
 
 {:.text-align-center}
-![A notification sent from NixOS and display in ChromeOS]({% link /images/chromeos-nixos-notifications.webp %}){:.centered style="width: 50%; border-radius: 10px;"}
+![A notification sent from NixOS and display in ChromeOS](../images/chromeos-nixos-notifications.webp){:.centered style="width: 50%; border-radius: 10px;"}
 _An example notification_

@@ -5,8 +5,8 @@ excerpt: >
   Transparently migrating this blog to its own domain.
 ---
 
-As a small reward for managing to write a bit more lately, I decided to set up a
-proper domain: here comes [aldur.blog](https://aldur.blog)!
+As a small reward for managing to write a bit more lately, I decided to set up
+a proper domain: here comes [aldur.blog](../index.md)!
 
 This post details the few steps I took to migrate. If it all went as expected,
 you might already be there, and you won't notice a thing. If instead you find
@@ -15,13 +15,12 @@ footer).
 
 ## Migrating
 
-We will have to migrate (again) and redirect readers from the previous domain to
-the new home. [Last
-year](https://aldur.blog/articles/2023/10/15/migrating-to-cloudflare-pages#preparing)
-I built some experience with it when migrating away from GitHub pages. This time
-it will be a bit easier, because the host (Cloudflare) is not changing. We just
-need to switch domains, and Cloudflare's redirects will do most of the heavy
-lifting.
+We will have to migrate (again) and redirect readers from the previous domain
+to the new home.
+[Last year](2023-10-15-migrating-to-cloudflare-pages.md#preparing) I built some
+experience with it when migrating away from GitHub pages. This time it will be
+a bit easier, because the host (Cloudflare) is not changing. We just need to
+switch domains, and Cloudflare's redirects will do most of the heavy lifting.
 
 To refresh things, we will need to:
 
@@ -53,8 +52,7 @@ modifications:
   into a `302` after testing it for a while.
 
 {:.text-align-center}
-![A screnshot from Cloudflare's dashboard showing a 301 redirect from
-`aldur.page.dev` to `https://aldur.blog`.]({% link /images/bulk_redirect.webp %}){:.centered}
+![A screnshot from Cloudflare's dashboard showing a 301 redirect from `aldur.page.dev` to `https://aldur.blog`.](../images/bulk_redirect.webp){:.centered}
 _You'll need to configure the bulk redirect this way instead of using the
 wildcard._
 
@@ -85,10 +83,9 @@ making the change.
 
 ### Take care of SEO
 
-Lastly, we need to [inform search engines]({% post_url 2023-10-30-jekyll-seo %})
-about the change. This blog relies almost exclusively on relative links. It uses
-absolute links only where required by standards (e.g., the sitemap and the RSS
-feed).
+Lastly, we need to [inform search engines](2023-10-30-jekyll-seo.md) about the
+change. This blog relies almost exclusively on relative links. It uses absolute
+links only where required by standards (e.g., the sitemap and the RSS feed).
 
 {% include github_link.html
 url="https://github.com/aldur/aldur.github.io/pull/50" text="This PR" %} updates
@@ -102,13 +99,12 @@ I used before to verify my "property".
 As a nice bonus Google would not load my `sitemap.xml`.
 
 {:.text-align-center}
-![A screnshot from Google Search console showing an error while trying to upload
-a sitemap.]({% link /images/sitemap_before.webp %}){:.centered}
+![A screnshot from Google Search console showing an error while trying to upload a sitemap.](../images/sitemap_before.webp){:.centered}
 _"Impossible to fetch": I consistently got this before, most likely
 because of the subdomain._
 
 {:.text-align-center}
-![A screnshot from Google Search console successfully upload a sitemap.]({% link /images/sitemap_after.webp %}){:.centered}
+![A screnshot from Google Search console successfully upload a sitemap.](../images/sitemap_after.webp){:.centered}
 _Green success, even if you don't read Italian._
 
 Hopefully, search engines will now: pickup new posts from the new domain and
@@ -133,9 +129,9 @@ anyway) and seems to have fixed the issue.
 ### Nits and bits
 
 {% include github_link.html
-url="https://github.com/aldur/aldur.github.io/pull/51" text="This PR" %} updates
-the email used in the ["About" section](/about). If it starts getting spammed, I will
-deploy the usual countermeasures.
+url="https://github.com/aldur/aldur.github.io/pull/51" text="This PR" %}
+updates the email used in the ["About" section](../pages/about.md). If it
+starts getting spammed, I will deploy the usual countermeasures.
 
 {% include github_link.html
 url="https://github.com/aldur/aldur.github.io/commit/23db5d54315f5e0a93da02bb8c375e9362a28dd6"
@@ -157,6 +153,7 @@ welcome to my new digital garden 🪴
     the logs. They don't, because Cloudflare analytics inject a `js` snippet
     into a page's HTML, which doesn't work for the feed XML. So, if you are
     reading this through an RSS client: that's great, please let me know! If you
-    aren't yet: [give it a try](/feed.xml), I really like it.
+    aren't yet: [give it a try]({{ '/feed.xml' | relative_url }}), I really
+    like it.
 
 [^test_this]: At least with Miniflux, the RSS client I am using.
