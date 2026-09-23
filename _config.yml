@@ -98,6 +98,7 @@ exclude:
   - gemset.nix
   - .direnv/
   - cloudflare_build.sh
+  - wrangler.toml
   # OG image rendering toolchain (see _plugins/og_image.rb, bin/og-render.mjs).
   - bin/
   - test/
