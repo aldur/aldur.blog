@@ -153,6 +153,7 @@ welcome to my new digital garden 🪴
     the logs. They don't, because Cloudflare analytics inject a `js` snippet
     into a page's HTML, which doesn't work for the feed XML. So, if you are
     reading this through an RSS client: that's great, please let me know! If you
-    aren't yet: [give it a try](/feed.xml), I really like it.
+    aren't yet: [give it a try]({{ '/feed.xml' | relative_url }}), I really
+    like it.
 
 [^test_this]: At least with Miniflux, the RSS client I am using.

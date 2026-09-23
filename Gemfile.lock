@@ -121,7 +121,7 @@ DEPENDENCIES
   jekyll (~> 4.4)
   jekyll-feed (~> 0.17)
   jekyll-redirect-from (~> 0.16)
-  jekyll-relative-links (~> 0.7)
+  jekyll-relative-links (~> 0.8)
   jekyll-seo-tag (~> 2.8)
   jekyll-sitemap (~> 1.4)
   logger

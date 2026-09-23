@@ -106,11 +106,10 @@ little traffic but has not picked up any page in the index yet.
     here.
 
 [^seo-tag]:
-    The plugin also makes social information and title/excerpts of posts
-    available to search crawlers. The [`minima`
-        theme](https://github.com/jekyll/minima) I am
-    [using](2023-10-07-reboot.md) suggests adding it in its default
-    configuration.
+    The plugin also makes social information and title/excerpts of
+    posts available to search crawlers. The [`minima`
+    theme](https://github.com/jekyll/minima) I am [using](2023-10-07-reboot.md)
+    suggests adding it in its default configuration.
 
 [^indexing]:
     In my case, trying to manually request the indexing from the Google Search

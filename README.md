@@ -102,7 +102,8 @@ The toggle icon overrides it.
 
 Ordinary Markdown links to files convert to Jekyll URLs through
 `jekyll-relative-links`. Paths are relative to the file containing the link, or
-absolute when they start with `/`. For example, from a post in `_posts/`:
+relative to the source root when they start with `/`. For example, from a post
+in `_posts/`:
 
 ```markdown
 [Another post](2023-10-07-reboot.md)
@@ -111,8 +112,9 @@ absolute when they start with `/`. For example, from a post in `_posts/`:
 [About, from anywhere](/pages/about.md)
 ```
 
-Reference-style links and `#section` anchors work too. `relative_links.strict`
-fails the build if a Markdown link is unresolved.
+Reference-style links and `#section` anchors work too. Keep local link text and
+destinations on one line so the plugin can rewrite them. For generated URLs
+such as `/feed.xml`, use `{{ '/feed.xml' | relative_url }}`.
 
 [0]: https://jekyllrb.com
 [1]: https://nixos.org

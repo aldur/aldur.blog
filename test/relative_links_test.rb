@@ -65,8 +65,12 @@ Dir.mktmpdir("relative-links-") do |root|
       raise "Missing source documents" unless documents.size == sources.size
 
       documents.each do |document|
-        ["/custom/", "/micros/2020/01/02/target/", "/about/#heading", "/tags/example.html"].each do |url|
-          raise "Link was not rewritten: #{url}" unless document.output.include?(%(href="#{baseurl}#{url}"))
+        { "Post" => "/custom/", "Micro" => "/micros/2020/01/02/target/",
+          "Page" => "/about/#heading", "Collection" => "/tags/example.html",
+          "Root" => "/about/", "Reference" => "/about/", "Liquid" => "/custom/",
+          "Download" => "/downloads/source.md?raw=1#heading" }.each do |label, url|
+          expected = %(<a href="#{baseurl}#{url}">#{label}</a>)
+          raise "Incorrect #{label} link in #{document.relative_path}" unless document.output.include?(expected)
         end
       end
     end
