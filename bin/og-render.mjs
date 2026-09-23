@@ -17,6 +17,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { deflateSync } from "node:zlib";
 import { createRequire } from "node:module";
+import { availableParallelism } from "node:os";
+import { Worker, isMainThread, workerData } from "node:worker_threads";
 import { initWasm, Resvg } from "@resvg/resvg-wasm";
 import encodeWebp, { init as initWebpEncode } from "@jsquash/webp/encode.js";
 import decodeWebp, { init as initWebpDecode } from "@jsquash/webp/decode.js";
@@ -80,16 +82,7 @@ async function transcodeBackgrounds(svg, cache) {
   return svg.replace(WEBP_URI, (_, b64) => `data:image/png;base64,${cache.get(b64)}`);
 }
 
-async function main() {
-  const manifestPath = process.argv[2];
-  if (!manifestPath) {
-    console.error("usage: og-render.mjs <manifest.json>");
-    process.exit(2);
-  }
-
-  const jobs = JSON.parse(await readFile(manifestPath, "utf8"));
-  if (jobs.length === 0) return;
-
+async function renderJobs(jobs) {
   // Initialise the WASM modules once, passing the precompiled modules
   // explicitly: Node can't fetch them by URL the way a browser would.
   await initWasm(readFile(require.resolve("@resvg/resvg-wasm/index_bg.wasm")));
@@ -133,7 +126,44 @@ async function main() {
   }
 }
 
-main().catch((err) => {
+async function main() {
+  const manifestPath = process.argv[2];
+  if (!manifestPath) {
+    console.error("usage: og-render.mjs <manifest.json>");
+    process.exit(2);
+  }
+
+  const jobs = JSON.parse(await readFile(manifestPath, "utf8"));
+  if (jobs.length === 0) return;
+
+  // Rendering and encoding are CPU-bound. Each worker initialises WASM and
+  // fonts once for its batch. Bound concurrency to limit WASM memory usage.
+  const requestedWorkers = Number(process.env.OG_RENDER_JOBS ?? 4);
+  if (!Number.isSafeInteger(requestedWorkers) || requestedWorkers < 1) {
+    throw new Error("OG_RENDER_JOBS must be a positive integer");
+  }
+  const count = Math.min(requestedWorkers, availableParallelism(), jobs.length);
+  if (count === 1) return renderJobs(jobs);
+
+  const batches = Array.from({ length: count }, () => []);
+  jobs.forEach((job, i) => batches[i % count].push(job));
+  const workers = [];
+  try {
+    await Promise.all(batches.map((batch) => new Promise((resolve, reject) => {
+      const worker = new Worker(new URL(import.meta.url), { workerData: batch });
+      workers.push(worker);
+      worker.once("error", reject);
+      worker.once("exit", (code) => {
+        if (code === 0) resolve();
+        else reject(new Error(`OG renderer worker exited with code ${code}`));
+      });
+    })));
+  } finally {
+    await Promise.all(workers.map((worker) => worker.terminate()));
+  }
+}
+
+(isMainThread ? main() : renderJobs(workerData)).catch((err) => {
   console.error(err);
   process.exit(1);
 });
