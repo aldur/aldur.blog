@@ -60,7 +60,7 @@ On an M3 Max 64GB MacBook Pro, I run `llama-server` through [`sandboxed-ai`][1]
 and `pi` in the [`aldur-pi`][2] container as follows:
 
 ```bash
-sandboxed-ai llama-server \
+sandboxed-ai --log llama-server --socket \
   -hf unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL \
   --spec-type draft-mtp \
   --spec-draft-n-max 3 \
@@ -75,15 +75,11 @@ sandboxed-ai llama-server \
   --presence-penalty 0.0 --repeat-penalty 1.0 \
   --reasoning-preserve \
   --perf --log-timestamps -lv 4 \
-  --cors-origins localhost \
-  --host /tmp/llama/llama.sock \
-  2>&1 | tee llama-server.log
+  --cors-origins localhost
 ```
 
 I am also experimenting with fewer checkpoints to reduce memory pressure during
-long runs.
-
-With the server running, start `pi` in another terminal:
+long runs. With the server running, start `pi` in another terminal:
 
 ```bash
 # Pull the container image while online
@@ -91,11 +87,18 @@ container image pull ghcr.io/aldur/aldur-pi:latest
 
 # Run it
 # Replace /Work/project with your workspace path
-env -u SSH_AUTH_SOCK container run -it --rm --network none --no-dns \
-    --volume /tmp/llama/llama.sock:/var/host-services/llama.sock \
-    --volume "$HOME/Work/project:/workspace" \
-    --env LLAMA_SOCKET_PATH=/var/host-services/llama.sock \
-    ghcr.io/aldur/aldur-pi:latest pi --models 'llama-cpp/*'
+env -u SSH_AUTH_SOCK container run -it --rm \
+  --network none --no-dns \
+  --read-only \
+  --tmpfs /tmp:mode=1777 \
+  --tmpfs /var/tmp:mode=1777 \
+  --tmpfs /home/aldur:uid=501,gid=100,mode=0700 \
+  --cap-drop ALL \
+  --cap-add CHOWN --cap-add SETUID --cap-add SETGID --cap-add SYS_CHROOT \
+  --volume ~/.local/state/sandboxed-ai/sockets/llama-server.sock:/var/host-services/llama.sock \
+  --volume "$HOME/work/project:/workspace" \
+  --env LLAMA_SOCKET_PATH=/var/host-services/llama.sock \
+  ghcr.io/aldur/aldur-pi:latest --models 'llama-cpp/*'
 ```
 
 [0]: https://blog.cryptographyengineering.com/2026/09/30/is-sandboxing-sufficient-to-contain-rogue-agents/
