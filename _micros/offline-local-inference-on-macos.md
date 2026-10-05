@@ -3,12 +3,12 @@ title: 'Offline local inference on macOS'
 date: 2026-10-05
 ---
 
-Local inference allows running agentic workflows over sensitive data (e.g.,
-financial, health) where both the computation and the data remain entirely
+Local inference lets me run agentic workflows on sensitive data (e.g.,
+financial or health records) while keeping both the computation and the data
 offline. That's my number one reason for it: _confidentiality_.
 
-Ensuring that (rogue) agents don't wonder around is a [hot topic][0]. My
-solution for it pairs:
+Ensuring that (rogue) agents don't wander around is a [hot topic][0]. My
+setup pairs:
 
 1. [Sandboxed inference on
    macOS](/_posts/2026-03-12-sandboxing-local-models-on-macos.md), which uses
@@ -26,36 +26,38 @@ solution for it pairs:
 
 ### Threat modeling
 
-`llama-cpp` runs through `seatbelt`: it can only read the model files, cannot
-reach the internet (models are downloaded beforehand), and adds a level of
-defense in case of vulnerabilities in the inference engine (e.g., the Jinja
-template parsing). `pi` runs in a "airgapped" Apple container that has no DNS
-and no networking. It communicates with `llama-cpp` over a Unix socket mounted
-within the container. A small relay converts the Unix socket into TCP for `pi`
-to connect to. `pi` knocks off tasks through the workspace mounted read/write
-within the container.
+`llama-cpp` runs under `seatbelt`: it has read-only access to the model files,
+cannot reach the internet (models and chat templates are downloaded
+beforehand), and adds a level of defense in case of vulnerabilities in the
+inference engine (e.g., the Jinja template parsing).
 
-In terms of threat modeling, this setup is probably: 1. good enough; 2. likely
-not bulletproof: just this week we saw a [new KVM escape][3]. The risks on the
-`llama-cpp` side are probably small because of `seatbelt` and a reduced attack
-surface. Things are different on the `pi` side. The Apple container runtime has
-had some [moderate issues][4], but I have done some light red-teaming against
-it and it now holds relatively well. The biggest attack surface is the mounted
-workspace. An agent can "poison" it and then try exfiltration through macOS
-(e.g., by introducing a malicious `git` hook). To solve that, I both reduce
-degrees of freedom within the container (e.g., by preventing an agent from
-writing into the `.git` folder) and by hardening macOS and its configuration
-(e.g., `git` hooks are entirely disabled).
+`pi` runs in an Apple container with DNS and external networking disabled. It
+communicates with `llama-cpp` over a Unix socket mounted within the container.
+A small relay exposes the Unix socket as a local TCP endpoint for `pi` to
+connect to. `pi` works in a workspace mounted read/write inside the container.
+
+In terms of threat modeling, this setup is probably good enough although likely
+not bulletproof: a [new KVM escape][3] just reminded us that VM isolation can
+fail. On the `llama-cpp` side, `seatbelt` helps reduce the attack surface. Things
+are different on the `pi` side. The Apple container runtime has had some
+[security issues][4], but it has held up reasonably well against my
+light red-teaming so far.
+
+The biggest attack surface is the mounted workspace. An agent can "poison" it
+and then try to exfiltrate data when tools on macOS act on those files (e.g.,
+by planting a malicious `git` hook). To reduce that risk, I restrict what the
+agent can do inside the container (e.g., prevent writes to the `.git` folder)
+and harden the host configuration (e.g., disable `git` hooks entirely).
 
 It's a cat-and-mouse game: we do our best to stay ahead, balancing security and
-practicality. For instance, we could use SSH to `scp` the workspace into the
-container and review any changes before pulling them back on the host. Mounting
+practicality. For instance, we could use `scp` to copy the workspace into the
+container and review any changes before copying them back to the host. Mounting
 is slightly more practical. We need to get things done, after all.
 
-### How to
+### Running it
 
-To run agentic workflows on an M3 Max 64GB MacBook Pro I run `llama-server`
-over [`sandboxed-ai`][1] and the [`aldur-pi`][2] container as follows:
+On an M3 Max 64GB MacBook Pro, I run `llama-server` through [`sandboxed-ai`][1]
+and `pi` in the [`aldur-pi`][2] container as follows:
 
 ```bash
 sandboxed-ai llama-server \
@@ -76,20 +78,22 @@ sandboxed-ai llama-server \
   --cors-origins localhost \
   --host /tmp/llama/llama.sock \
   2>&1 | tee llama-server.log
-
-# I am also experimenting with fewer checkpoints to reduce memory pressure over long runs.
 ```
 
-And then `pi` with:
+I am also experimenting with fewer checkpoints to reduce memory pressure during
+long runs.
+
+With the server running, start `pi` in another terminal:
 
 ```bash
-# Pull the container
+# Pull the container image while online
 container image pull ghcr.io/aldur/aldur-pi:latest
 
 # Run it
+# Replace /Work/project with your workspace path
 env -u SSH_AUTH_SOCK container run -it --rm --network none --no-dns \
     --volume /tmp/llama/llama.sock:/var/host-services/llama.sock \
-    --volume "/Work/project:/workspace" \
+    --volume "$HOME/Work/project:/workspace" \
     --env LLAMA_SOCKET_PATH=/var/host-services/llama.sock \
     ghcr.io/aldur/aldur-pi:latest pi --models 'llama-cpp/*'
 ```
