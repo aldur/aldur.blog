@@ -187,6 +187,16 @@
           program = pkgs.lib.getExe package;
           meta = { inherit description; };
         };
+
+        # Nix finds the flake from subdirectories, but leaves the app's working
+        # directory unchanged. Use the live checkout, not the Nix store source.
+        writeRepoShellScriptBin =
+          scriptName: script:
+          pkgs.writeShellScriptBin scriptName ''
+            repo_root=$(${pkgs.git}/bin/git rev-parse --show-toplevel) || exit 1
+            cd "$repo_root" || exit 1
+            ${script}
+          '';
       in
       {
         checks = import ./test/tests.nix {
@@ -194,7 +204,7 @@
         };
 
         packages = {
-          lockGemset = pkgs.writeShellScriptBin "lock" ''
+          lockGemset = writeRepoShellScriptBin "lock" ''
             unset BUNDLE_PATH
             echo "Locking Gemfile..."
             ${jekyllEnv}/bin/bundler lock
@@ -204,7 +214,7 @@
 
           default = buildJekyll;
 
-          serveJekyll = pkgs.writeShellScriptBin "serve" ''
+          serveJekyll = writeRepoShellScriptBin "serve" ''
             unset BUNDLE_PATH
             export PATH="${jekyllEnv}/bin:$PATH"
             export OG_RENDER_SCRIPT="${ogRenderer}/og-render.mjs"
@@ -212,20 +222,20 @@
                 ${jekyllArgs} --livereload
           '';
 
-          cleanJekyll = pkgs.writeShellScriptBin "clean" ''
+          cleanJekyll = writeRepoShellScriptBin "clean" ''
             unset BUNDLE_PATH
             ${jekyllEnv}/bin/bundler exec -- jekyll clean \
                 ${jekyllArgs}
           '';
 
-          regenerateOgImages = pkgs.writeShellScriptBin "og" ''
+          regenerateOgImages = writeRepoShellScriptBin "og" ''
             unset BUNDLE_PATH
             export PATH="${jekyllEnv}/bin:$PATH"
             export OG_RENDER_SCRIPT="${ogRenderer}/og-render.mjs"
             FORCE_OG=1 ${jekyllEnv}/bin/bundler exec -- jekyll build ${jekyllArgs}
           '';
 
-          newPost = pkgs.writeShellScriptBin "new" ''
+          newPost = writeRepoShellScriptBin "new" ''
             ${usage}
 
             ${slug}
@@ -241,7 +251,7 @@
             echo "Created file \"$output\"."
           '';
 
-          newMicro = pkgs.writeShellScriptBin "micro" ''
+          newMicro = writeRepoShellScriptBin "micro" ''
             # Check for -b flag
             checkout_branch=false
             args=()
