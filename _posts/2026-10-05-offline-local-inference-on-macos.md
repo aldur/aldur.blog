@@ -1,6 +1,9 @@
 ---
 title: 'Offline local inference on macOS'
 date: 2026-10-05
+excerpt: >
+  Running AI agents offline on macOS: sandboxed local inference, an isolated
+  container, and the security tradeoffs of a shared workspace.
 ---
 
 Local inference lets me run agentic workflows on sensitive data (e.g.,
@@ -21,15 +24,15 @@ setup pairs:
 <picture class="text-align-center" markdown="1">
   <img src="{% link images/sandboxed-ai.svg %}" alt="A diagram showing a sandboxed llama-cpp server and an offline pi agent running in Apple container, everything under macOS." class="centered inverted">
 </picture>
-<small>_Zebra stripes represent sandboxing._</small>
+<small>_Zebra stripes represent sandboxing or isolation._</small>
 </p>
 
 ### Threat modeling
 
-`llama-cpp` runs under `seatbelt`: it has read-only access to the model files,
-cannot reach the internet (models and chat templates are downloaded
-beforehand), and adds a level of defense in case of vulnerabilities in the
-inference engine (e.g., the Jinja template parsing).
+`llama-cpp` runs under `seatbelt` with read-only access to the model files and
+no internet access. Models and chat templates are downloaded beforehand. The
+sandbox adds a level of defense in case of vulnerabilities in the inference
+engine (e.g., in Jinja template parsing).
 
 `pi` runs in an Apple container with DNS and external networking disabled. It
 communicates with `llama-cpp` over a Unix socket mounted within the container.
@@ -50,14 +53,17 @@ agent can do inside the container (e.g., prevent writes to the `.git` folder)
 and harden the host configuration (e.g., disable `git` hooks entirely).
 
 It's a cat-and-mouse game: we do our best to stay ahead, balancing security and
-practicality. For instance, we could use `scp` to copy the workspace into the
-container and review any changes before copying them back to the host. Mounting
-is slightly more practical. We need to get things done, after all.
+practicality. For instance, we could copy the workspace into the container and
+review any changes before copying them back to the host. Mounting is slightly
+more practical. We need to get things done, after all.
 
 ### Running it
 
-On an M3 Max 64GB MacBook Pro, I run `llama-server` through [`sandboxed-ai`][1]
-and `pi` in the [`aldur-pi`][2] container as follows:
+On an M3 Max 64GB MacBook Pro, I run `llama-server` through
+[`sandboxed-ai`][1] and `pi` in the [`aldur-pi`][2] container as follows.
+Both commands are long and ugly, but I prefer to see exactly what I'm running
+on the host. I have also painstakingly reviewed the `sandboxed-ai` code
+and kept it readable so that others can inspect it too.
 
 ```bash
 sandboxed-ai --log llama-server --socket \
@@ -86,7 +92,7 @@ long runs. With the server running, start `pi` in another terminal:
 container image pull ghcr.io/aldur/aldur-pi:latest
 
 # Run it
-# Replace /Work/project with your workspace path
+# Replace $HOME/work/project with your workspace path
 env -u SSH_AUTH_SOCK container run -it --rm \
   --network none --no-dns \
   --read-only \
