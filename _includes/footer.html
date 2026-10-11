@@ -5,11 +5,10 @@
     <div class="footer-col-wrapper">
       <div class="footer-col">
         <p class="feed-subscribe">
-          <a href="{{ site.feed.path | default: 'feed.xml' | absolute_url }}" target="_blank" title="Subscribe to syndication feed">
-            <svg class="svg-icon orange" viewbox="0 0 16 16">
-              {% include social-icons/rss.svg.path %}
-            </svg>
-          <span>{{ site.title }}</span></a>
+          <svg class="svg-icon orange" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            {% include social-icons/rss.svg.path %}
+          </svg>
+          <a href="{{ site.feed.path | default: 'feed.xml' | absolute_url }}">Subscribe via RSS</a>
         </p>
       </div>
       <div class="footer-col">

@@ -137,6 +137,19 @@ code.highlighter-rouge {
 /** --- Site footer --- */
 .site-footer {
   padding: math.div($spacing-unit, 4) 0;
+
+  a {
+    color: var(--minima-text-color);
+
+    &:hover {
+      color: var(--minima-link-hover-color);
+
+      .svg-icon {
+        color: inherit;
+        border-bottom-color: var(--minima-brand-color);
+      }
+    }
+  }
 }
 
 .footer-heading {
@@ -149,20 +162,26 @@ code.highlighter-rouge {
   margin-left: 0;
 }
 
-.footer-col-wrapper,
-.social-links {
+.footer-col-wrapper {
   align-items: center;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  text-align: center;
 
-  @media screen and (max-width: $on-tiny) {
-    flex-direction: column;
+  @media screen and (max-width: $on-medium) {
+    grid-template-columns: 1fr;
   }
 }
 
 .social-media-list {
   margin: 0 auto;
+
+  .svg-icon {
+    // Reserve the underline without changing icon alignment.
+    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
+    margin-bottom: -4px;
+  }
 
   li {
     margin: 5px 0 5px 0;
@@ -173,35 +192,15 @@ code.highlighter-rouge {
   }
 }
 
-.footer-col {
+.footer-col,
+.footer-col:first-child,
+.footer-col:last-child {
   margin-bottom: 0;
+  padding: 0;
   width: unset;
-
-  a {
-    color: $text-color;
-  }
-
-  @media screen and (min-width: $on-tiny) {
-    padding: 0 math.div($spacing-unit, 2);
-
-    &:first-child {
-      padding-right: math.div($spacing-unit, 2);
-      padding-left: 0;
-    }
-
-    &:last-child {
-      padding-right: 0;
-      padding-left: math.div($spacing-unit, 2);
-    }
-  }
-
-  @media screen and (max-width: $on-tiny) {
-    padding: 0 0;
-  }
 }
 
 .footer-col-desc {
-  text-align: right;
   margin: 0;
 }
 
