@@ -54,6 +54,11 @@ Configure whether excerpts show (by order of priority):
 RSS feeds are styled to mimic the main blog style and read through continuous
 scrolling.
 
+### Copying code
+
+Code blocks show a copy button (when the browser supports JS and clipboard
+access).
+
 ### Viewing posts as Markdown
 
 View the markdown source of any post by changing its URL to end with `.md`:

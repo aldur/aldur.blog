@@ -232,6 +232,54 @@ a code {
   color: inherit;
 }
 
+.copyable-code {
+  position: relative;
+}
+
+.copy-code {
+  position: absolute;
+  top: 0;
+  right: 4px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  color: var(--minima-brand-color-dimmed);
+  background: var(--minima-code-background-color);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--minima-text-color);
+    background: var(--minima-background-color);
+    border-color: var(--minima-border-color-01);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--minima-link-base-color);
+    outline-offset: 2px;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  // Keep status feedback available to screen readers.
+  span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
 .post-navigation {
   display: grid;
   grid-template-columns: 1fr 1fr;
