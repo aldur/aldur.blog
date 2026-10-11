@@ -3,11 +3,9 @@ short_title: U Bits
 
 about:
   long: >- # ignore line-breaks until next key.
-    Sometimes, I'll find knowledge that has stood the test of time and applies
-    across disciplines. It helps me connect the dots, make better decisions, or
-    simply understand things more deeply. Some call it "mental models"; I like
-    to call it "Universal Bits" and I write about it here. You will also find me 
-    writing about computer science and any topic that captures my curiosity.
+    I try to write about ideas and knowledge that help me understand how
+    things work and connect the dots. Often, it's just about what I've
+    been hacking on or building, or whatever keeps me curious.
   short: >-
     Hi! 👋 Exploring mental models, connecting the dots, and writing about it.
 
@@ -156,7 +154,8 @@ relative_links:
 
 feed:
   collections:
-    - micros
+    micros:
+      path: /feed/micros.xml
 
 # Silence Saas deprecation warnings, to be removed after this is fixed upstream in minima:
 # https://github.com/jekyll/minima/issues/815#issuecomment-2440028795

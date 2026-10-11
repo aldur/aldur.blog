@@ -52,6 +52,7 @@ img.centered {
 
 .site-header-wrapper {
   display: flex;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: $on-tiny) {
@@ -88,10 +89,23 @@ img.centered {
 }
 
 .theme-mode-button {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
   background-color: $background-color;
   border: 0px;
+  border-radius: 3px;
   color: $text-color;
   padding: 0 0;
+  cursor: pointer;
+}
+
+.theme-mode-button:focus-visible {
+  outline: 2px solid var(--minima-link-base-color);
+  outline-offset: 2px;
 }
 
 .theme-mode-button svg {
@@ -123,7 +137,19 @@ code.highlighter-rouge {
 /** --- Site footer --- */
 .site-footer {
   padding: math.div($spacing-unit, 4) 0;
-  height: 50px;
+
+  a {
+    color: var(--minima-text-color);
+
+    &:hover {
+      color: var(--minima-link-hover-color);
+
+      .svg-icon {
+        color: inherit;
+        border-bottom-color: var(--minima-brand-color);
+      }
+    }
+  }
 }
 
 .footer-heading {
@@ -136,20 +162,26 @@ code.highlighter-rouge {
   margin-left: 0;
 }
 
-.footer-col-wrapper,
-.social-links {
+.footer-col-wrapper {
   align-items: center;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  text-align: center;
 
-  @media screen and (max-width: $on-tiny) {
-    flex-direction: column;
+  @media screen and (max-width: $on-medium) {
+    grid-template-columns: 1fr;
   }
 }
 
 .social-media-list {
   margin: 0 auto;
+
+  .svg-icon {
+    // Reserve the underline without changing icon alignment.
+    border-bottom: 1px solid transparent;
+    padding-bottom: 3px;
+    margin-bottom: -4px;
+  }
 
   li {
     margin: 5px 0 5px 0;
@@ -160,35 +192,15 @@ code.highlighter-rouge {
   }
 }
 
-.footer-col {
+.footer-col,
+.footer-col:first-child,
+.footer-col:last-child {
   margin-bottom: 0;
+  padding: 0;
   width: unset;
-
-  a {
-    color: $text-color;
-  }
-
-  @media screen and (min-width: $on-tiny) {
-    padding: 0 math.div($spacing-unit, 2);
-
-    &:first-child {
-      padding-right: math.div($spacing-unit, 2);
-      padding-left: 0;
-    }
-
-    &:last-child {
-      padding-right: 0;
-      padding-left: math.div($spacing-unit, 2);
-    }
-  }
-
-  @media screen and (max-width: $on-tiny) {
-    padding: 0 0;
-  }
 }
 
 .footer-col-desc {
-  text-align: right;
   margin: 0;
 }
 
@@ -217,6 +229,54 @@ code {
 // Preserve link colors for code inside links
 a code {
   color: inherit;
+}
+
+.copyable-code {
+  position: relative;
+}
+
+.copy-code {
+  position: absolute;
+  top: 0;
+  right: 4px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  color: var(--minima-brand-color-dimmed);
+  background: var(--minima-code-background-color);
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--minima-text-color);
+    background: var(--minima-background-color);
+    border-color: var(--minima-border-color-01);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--minima-link-base-color);
+    outline-offset: 2px;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  // Keep status feedback available to screen readers.
+  span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
 }
 
 .post-navigation {
