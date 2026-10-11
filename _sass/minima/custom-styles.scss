@@ -52,6 +52,7 @@ img.centered {
 
 .site-header-wrapper {
   display: flex;
+  flex-wrap: wrap;
 }
 
 @media screen and (max-width: $on-tiny) {
@@ -88,10 +89,23 @@ img.centered {
 }
 
 .theme-mode-button {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
   background-color: $background-color;
   border: 0px;
+  border-radius: 3px;
   color: $text-color;
   padding: 0 0;
+  cursor: pointer;
+}
+
+.theme-mode-button:focus-visible {
+  outline: 2px solid var(--minima-link-base-color);
+  outline-offset: 2px;
 }
 
 .theme-mode-button svg {
@@ -123,7 +137,6 @@ code.highlighter-rouge {
 /** --- Site footer --- */
 .site-footer {
   padding: math.div($spacing-unit, 4) 0;
-  height: 50px;
 }
 
 .footer-heading {

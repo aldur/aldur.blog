@@ -33,8 +33,8 @@ The source code is also available here:
       </nav>
       {%- endif -%}
 
-      <button type="button" class="theme-mode-button" onclick="setSkin()">
-        <svg class="svg-icon" id="skin-icon" role="img" focusable="false">
+      <button type="button" class="theme-mode-button" onclick="setSkin()" aria-label="Switch color theme" title="Switch color theme">
+        <svg class="svg-icon" id="skin-icon" aria-hidden="true" focusable="false">
           <use id="use-skin-icon" xlink:href="{{ '/assets/skin-icons.svg#sun' | relative_url }}"></use>
         </svg>
       </button>
@@ -52,163 +52,95 @@ The source code is also available here:
     Dark: 'dark',
   };
 
-  const Icons = {
-    Light: 'sun',
-    Dark: 'moon',
-  };
+  const themeButton = document.querySelector('.theme-mode-button');
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const pictureMedia = new WeakMap();
+  let currentSkin = Skins.Default;
 
-  function toggleSkinFrom(currentSkin) {
-    switch (currentSkin) {
-      case Skins.Default: // default, auto
-        {
-          if (currentSkin == Skins.Default) {
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-              return Skins.Light;
-            }
+  function nextSkin() {
+    const isDark = currentSkin === Skins.Default ? systemTheme.matches : currentSkin === Skins.Dark;
+    return isDark ? Skins.Light : Skins.Dark;
+  }
 
-            return Skins.Dark;
-          }
-        }
-        break;
-      case Skins.Light:
-        return Skins.Dark;
-      case Skins.Dark:
-        return Skins.Light;
-      default:
-        console.error(`Unexpected skin ${currentSkin}.`);
+  function updateThemeButton() {
+    const targetSkin = nextSkin();
+    const label = `Switch to ${targetSkin} theme`;
+    themeButton.setAttribute('aria-label', label);
+    themeButton.setAttribute('title', label);
+    const icon = document.getElementById('use-skin-icon');
+    const iconPath = icon.getAttribute('xlink:href').split('#')[0];
+    icon.setAttribute('xlink:href', `${iconPath}#${targetSkin === Skins.Light ? 'sun' : 'moon'}`);
+  }
+
+  // Keep the original queries so System can restore the browser's behavior.
+  // Minima emits standalone prefers-color-scheme queries for its theme styles.
+  const skinMediaRules = [];
+  for (const stylesheet of document.styleSheets) {
+    for (const rule of stylesheet.cssRules) {
+      if (rule.media && rule.media.mediaText.includes('prefers-color-scheme')) {
+        skinMediaRules.push({ rule, media: rule.media.mediaText });
+      }
     }
   }
 
-  function iconForSkin(currentSkin) {
-    let toggledSkin = toggleSkinFrom(currentSkin);
-    console.assert(toggledSkin != Skins.Default, "Didn't expect default skin.");
-
-    switch (toggledSkin) {
-      case Skins.Light:
-        return Icons.Light;
-      case Skins.Dark:
-        return Icons.Dark;
-      default:
-        console.error(`Unexpected skin ${toggledSkin}.`);
-    }
+  function mediaForSkin(media, skin) {
+    return skin === Skins.Default ? media : (media.includes(skin) ? 'all' : 'not all');
   }
 
   function setPictureSource(skin) {
-    document.querySelectorAll('picture').forEach(picture => {
-      // Note: this selector matches on strings, 
-      // so it will continue working even when prefixed with `original-`
-      const sources = picture.querySelectorAll('source[media*="prefers-color-scheme"]');
-      const img = picture.querySelector('img');
-
-      sources.forEach(source => {
+    document.querySelectorAll('picture source[media]').forEach(source => {
+      if (!pictureMedia.has(source)) {
         const media = source.getAttribute('media');
-        source.setAttribute('media', `original-${media}`);
-
-        if (media.includes(skin)) {
-          img.src = source.srcset;
-        }
-      });
+        if (!media.includes('prefers-color-scheme')) return;
+        pictureMedia.set(source, media);
+      }
+      source.setAttribute('media', mediaForSkin(pictureMedia.get(source), skin));
     });
   }
 
   function applySkin(skin) {
-    // https://stackoverflow.com/questions/56300132/how-to-override-css-prefers-color-scheme-setting
-    for (var s = 0; s < document.styleSheets.length; s++) {
-      for (var i = 0; i < document.styleSheets[s].cssRules.length; i++) {
-        rule = document.styleSheets[s].cssRules[i];
-
-        if (rule && rule.media && rule.media.mediaText.includes('prefers-color-scheme')) {
-          switch (skin) {
-            case Skins.Light:
-              rule.media.appendMedium('original-prefers-color-scheme');
-              if (rule.media.mediaText.includes('light')) {
-                rule.media.deleteMedium('(prefers-color-scheme: light)');
-              }
-              if (rule.media.mediaText.includes('dark')) {
-                rule.media.deleteMedium('(prefers-color-scheme: dark)');
-              }
-              break;
-            case Skins.Dark:
-              // Our CSS only inlcudes `prefers-color-scheme: dark.
-              // So, by adding `prefers-color-scheme: light`
-              // we enable it at all times.
-              rule.media.appendMedium('(prefers-color-scheme: light)');
-
-              // This is a fix wrt the provided implementation.
-              if (!rule.media.mediaText.includes('dark')) {
-                rule.media.appendMedium('(prefers-color-scheme: dark)');
-              }
-              if (rule.media.mediaText.includes('original')) {
-                rule.media.deleteMedium('original-prefers-color-scheme');
-              }
-              break;
-            default:
-              console.error(`Unexpected skin ${skin}.`);
-          }
-        }
-      }
+    currentSkin = skin;
+    for (const { rule, media } of skinMediaRules) {
+      rule.media.mediaText = mediaForSkin(media, skin);
     }
-
-    // Handle <picture> based on srcset
-    // We can only do that after DOM has loaded
-    if (document.readyState === "loading") {
-      // Loading hasn't finished yet
-      document.addEventListener("DOMContentLoaded", 
-        function() { setPictureSource(skin); });
-    } else {
-      setPictureSource(skin);
-    }
-  }
-
-  function setSkin(targetSkin) {
-    let currentSkin = localStorage.getItem(SKIN_NAME_KEY);
-    if (currentSkin === null) {
-      currentSkin = Skins.Default;
-    }
-
-    if (targetSkin === undefined) {
-      targetSkin = toggleSkinFrom(currentSkin);
-    }
-    localStorage.setItem(SKIN_NAME_KEY, targetSkin);
-
-    setIcon(targetSkin);
-    applySkin(targetSkin);
+    setPictureSource(skin);
     setBrowserThemeColor();
+    updateThemeButton();
   }
 
-  function setIcon(targetSkin) {
-    let iconTag = document.getElementById('use-skin-icon');
-    let iconRef = iconTag.getAttribute('xlink:href');
-    let currentIcon = iconRef.split('#')[1];
-    iconTag.setAttribute('xlink:href', iconRef.replace(currentIcon, iconForSkin(targetSkin)));
+  function setSkin(skin = nextSkin()) {
+    if (!Object.values(Skins).includes(skin)) return;
+    // Keep the control usable even when storage is unavailable.
+    try {
+      if (skin === Skins.Default) {
+        localStorage.removeItem(SKIN_NAME_KEY);
+      } else {
+        localStorage.setItem(SKIN_NAME_KEY, skin);
+      }
+    } catch (_) {}
+    applySkin(skin);
   }
 
   function loadSkin() {
-    let savedSkin = localStorage.getItem(SKIN_NAME_KEY);
-    if (savedSkin !== null) {
-      setSkin(savedSkin); // Also takes care of the icon.
-    } else {
-      setBrowserThemeColor();
-      setIcon(Skins.Default);
-    }
+    let skin;
+    try {
+      skin = localStorage.getItem(SKIN_NAME_KEY);
+    } catch (_) {}
+    applySkin(Object.values(Skins).includes(skin) ? skin : Skins.Default);
   }
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (_) => {
-    if (localStorage.getItem(SKIN_NAME_KEY) === null) {
-      setIcon(Skins.Default);
-    }
+  // Pictures appear after this inline script in the document.
+  document.addEventListener('DOMContentLoaded', () => setPictureSource(currentSkin));
+
+  systemTheme.addEventListener('change', () => {
+    updateThemeButton();
     setBrowserThemeColor();
   });
 
-  // Listen for local storage changes on our theme key. This lets
-  // one tab to be notified if the theme is changed in another,
-  // and update itself accordingly.
-  // https://brandur.org/fragments/dark-mode-notes
-  window.addEventListener("storage", (e) => {
-    if (e.key == SKIN_NAME_KEY) {
-      loadSkin()
-    }
-  })
+  // Restore the theme in other tabs, including a return to System.
+  window.addEventListener('storage', (event) => {
+    if (event.key === SKIN_NAME_KEY || event.key === null) loadSkin();
+  });
 
   loadSkin();
 </script>
