@@ -41,6 +41,19 @@ tag: tagname
 
 The tag layout filters all posts with that tag.
 
+### Related reading
+
+Add recommendations to a post or micro's frontmatter:
+
+```yaml
+related:
+  - _posts/2026-03-12-sandboxing-local-models-on-macos.md
+  - _micros/til-ephemeral-qemu-vms.md
+```
+
+Use source paths from the repository root, without a leading slash. Missing
+targets fail the Jekyll build.
+
 ### Excerpts
 
 Configure whether excerpts show (by order of priority):
@@ -61,7 +74,8 @@ access).
 
 ### Viewing posts as Markdown
 
-View the markdown source of any post by changing its URL to end with `.md`:
+Use **view as / copy .md** at the end of a post or micro. You can also view the
+source by changing its URL to end with `.md`:
 
 - `page.html` → `page.md`
 - `page/` → `page.md`
