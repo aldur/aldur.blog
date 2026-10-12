@@ -8,6 +8,42 @@
   margin-bottom: math.div($spacing-unit, 4);
 }
 
+// Keep the section title and current year visible while browsing the archives.
+.post-index {
+  --index-title-height: 3rem;
+  --index-heading-gap: #{math.div($spacing-unit, 2)};
+
+  > .page-heading,
+  .post-year-heading {
+    position: sticky;
+    margin-bottom: 0;
+    padding-bottom: var(--index-heading-gap);
+    background: var(--minima-background-color);
+  }
+
+  > .page-heading {
+    top: 0;
+    z-index: 2;
+    line-height: var(--index-title-height);
+  }
+
+  .post-year-heading {
+    top: calc(var(--index-title-height) + var(--index-heading-gap));
+    z-index: 1;
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .post-list a {
+    // Keep focused links clear of both sticky headings.
+    scroll-margin-top: calc(var(--index-title-height) + 2.25rem + 2 * var(--index-heading-gap));
+  }
+}
+
+.post-year {
+  display: flow-root;
+}
+
 img.centered {
   display: block;
   margin-left: auto;

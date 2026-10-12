@@ -1,9 +1,10 @@
 {%- if include.posts.size > 0 -%}
-  <ul class="post-list">
-    {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-    {% assign postsByYear = include.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
-    {% for year in postsByYear %}
-      <h2>{{ year.name }}</h2>
+  {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+  {% assign postsByYear = include.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+  {% for year in postsByYear %}
+    <section class="post-year" aria-labelledby="year-{{ year.name }}">
+      <h2 class="post-year-heading" id="year-{{ year.name }}">{{ year.name }}</h2>
+      <ul class="post-list">
       {% for post in year.items %}
         <li>
           <span class="post-meta">
@@ -26,6 +27,7 @@
           {%- endif -%}
         </li>
       {% endfor %}
-    {% endfor %}
-  </ul>
+      </ul>
+    </section>
+  {% endfor %}
 {%- endif -%}
