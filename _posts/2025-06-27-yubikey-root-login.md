@@ -4,6 +4,9 @@ date: 2025-06-29 17:25:00 +0200
 excerpt: >
   Finding a secure and usable privilege escalation method for NixOS containers.
 tags: [ChromeOS]
+related:
+  - _posts/2025-06-26-yubikey-agent.md
+  - _posts/2026-02-01-impermanent-nixos-vms-in-baguette.md
 ---
 
 When working in

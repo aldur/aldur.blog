@@ -4,6 +4,8 @@ excerpt: >
   Default-deny sandbox profiles for inference and agents, plus local Qwen3.5 and a QEMU VM.
 redirect_from:
   - /sandboxed-ai
+related:
+  - _posts/2026-10-05-offline-local-inference-on-macos.md
 ---
 
 The recently released [Qwen3.5 family][0] advances the capabilities of

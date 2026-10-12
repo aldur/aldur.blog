@@ -2,6 +2,9 @@
 title: 'Nuggets of psychology'
 excerpt: >
   A living collection of psychological mental models for making better decisions.
+related:
+  - _posts/2025-11-09-effective-salespeople.md
+  - _posts/2025-07-12-lagging-indicators.md
 ---
 
 Understanding the world requires seeking good explanations, not fooling

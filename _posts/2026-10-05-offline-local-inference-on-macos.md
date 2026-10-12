@@ -4,6 +4,9 @@ date: 2026-10-05
 excerpt: >
   Running AI agents offline on macOS: sandboxed local inference, an isolated
   container, and the security tradeoffs of a shared workspace.
+related:
+  - _posts/2026-03-12-sandboxing-local-models-on-macos.md
+  - _posts/2026-06-11-nixos-for-apple-container.md
 ---
 
 Local inference lets me run agentic workflows on sensitive data (e.g.,

@@ -7,6 +7,9 @@ last_modified_at: 2026-01-18
 tags: [ChromeOS]
 redirect_from:
   - /nixos-crostini
+related:
+  - _posts/2025-10-29-nixos-baguette-images-in-chromeos.md
+  - _micros/multiple-crostini-containers.md
 ---
 
 Chromebooks have a reputation of being secure devices:

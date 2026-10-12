@@ -3,6 +3,9 @@ title: 'Deploying NixOS container images'
 date: 2025-07-19
 last_modified_at: 2025-07-26
 tags: [ChromeOS]
+related:
+  - _posts/2025-06-19-nixos-in-crostini.md
+  - _posts/2025-10-29-nixos-baguette-images-in-chromeos.md
 ---
 
 This post extends the

@@ -1,6 +1,8 @@
 ---
 title: 'human.json'
 date: 2026-03-20
+related:
+  - _posts/2026-03-20-human-voices.md
 ---
 
 As a small addition to my longer post about

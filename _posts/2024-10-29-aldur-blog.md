@@ -3,6 +3,9 @@ title: "Migrating to aldur.blog"
 last_modified_at: 2025-06-20
 excerpt: >
   Transparently migrating this blog to its own domain.
+related:
+  - _posts/2023-10-15-migrating-to-cloudflare-pages.md
+  - _posts/2023-10-30-jekyll-seo.md
 ---
 
 As a small reward for managing to write a bit more lately, I decided to set up

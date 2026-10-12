@@ -1,6 +1,8 @@
 ---
 title: 'PSA: Apple container bloats Time Machine backups'
 date: 2026-06-18
+related:
+  - _posts/2026-06-11-nixos-for-apple-container.md
 ---
 
 After

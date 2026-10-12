@@ -4,6 +4,9 @@ date: 2025-06-26 11:17:00 +0200
 excerpt: >
   I use a single Yubikey and two SSH keys to authenticate to remote hosts and sign commits.
 tags: [ChromeOS]
+related:
+  - _posts/2025-06-27-yubikey-root-login.md
+  - _micros/fido2-almost-works-in-linux-on-chromeos.md
 ---
 
 With [NixOS containers in ChromeOS](2025-06-19-nixos-in-crostini.md), I use an

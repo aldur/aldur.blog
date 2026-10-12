@@ -3,6 +3,9 @@ layout: post
 title: 'Bare-minimum Google indexing for Jekyll'
 categories: [articles]
 last_modified_at: 2024-02-26
+related:
+  - _posts/2024-10-29-aldur-blog.md
+  - _micros/generating-opengraph-images.md
 ---
 
 Searching for this blog on Google right now does not return any results. Let's

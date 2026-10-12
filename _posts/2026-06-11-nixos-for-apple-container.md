@@ -3,6 +3,9 @@ title: 'NixOS for Apple container'
 last_modified_at: 2026-06-18
 excerpt: >
   Building NixOS images that run both as containers and VMs on macOS.
+related:
+  - _posts/2026-10-05-offline-local-inference-on-macos.md
+  - _micros/psa-apple-container-bloats-time-machine-backups.md
 ---
 
 I have written at length about containers and VMs on this blog: I use them

@@ -3,6 +3,8 @@ title: 'Effective salespeople'
 excerpt: >
   Good sales create mutual wins by managing expectations and honestly defusing
   the negatives.
+related:
+  - _posts/2025-09-08-nuggets-of-psychology.md
 ---
 
 Nick Huber, in "_The Sweaty Startup_", writes that _sales is the foundation of

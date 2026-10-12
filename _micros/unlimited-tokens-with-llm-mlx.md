@@ -1,6 +1,9 @@
 ---
 title: 'Unlimited tokens with llm-mlx'
 date: 2025-07-13
+related:
+  - _micros/mlx-with-metal-support-through-nix.md
+  - _posts/2026-10-05-offline-local-inference-on-macos.md
 ---
 
 I like playing with self-hosted LLMs on Apple hardware through [`llm-mlx`][0],

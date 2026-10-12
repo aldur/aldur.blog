@@ -1,6 +1,8 @@
 ---
 title: 'Sunsetting my Hammerspoon emoji chooser'
 date: 2025-07-14
+related:
+  - _posts/2016-12-19-hammerspoon-emojis.md
 ---
 
 One of the things I love about writing software for myself is the very low risk

@@ -2,6 +2,8 @@
 title: "Nix hash mishaps"
 excerpt: >
   Lesson learned: double-check your Nix hashes for fixed-output derivations.
+related:
+  - _micros/debugging-nix-derivations.md
 ---
 
 ### The problem
@@ -118,7 +120,6 @@ _[Caveats][caveats]_. Lesson learned!
 > - When changing any fetcher parameters, always update the output hash.
 >   Use one of the methods from [the section called "Updating source hashes"](https://nixos.org/manual/nixpkgs/stable/#sec-pkgs-fetchers-updating-source-hashes).
 >   Otherwise, existing store objects that match the output hash will be re-used rather than fetching new content.
-
 
 ### The solution
 

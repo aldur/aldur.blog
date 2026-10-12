@@ -3,6 +3,9 @@ title: 'Impermanent NixOS VMs in ChromeOS'
 excerpt: >
   Automatically erasing /home in NixOS VMs.
 tags: [ChromeOS]
+related:
+  - _posts/2025-10-29-nixos-baguette-images-in-chromeos.md
+  - _micros/til-ephemeral-qemu-vms.md
 ---
 
 We have [talked about](../_tag_indexes/ChromeOS.md) using NixOS to run VMs

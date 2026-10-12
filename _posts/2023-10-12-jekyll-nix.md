@@ -1,5 +1,8 @@
 ---
 title: 'Jekyll + Nix'
+related:
+  - _posts/2023-10-15-migrating-to-cloudflare-pages.md
+  - _micros/ruby-versions-cloudflare-pages.md
 ---
 
 When I [started writing again](2023-10-07-reboot.md), getting this blog to

@@ -2,6 +2,9 @@
 title: 'FIDO2 almost works in Linux on ChromeOS'
 date: 2025-07-30
 tags: [ChromeOS]
+related:
+  - _posts/2025-06-26-yubikey-agent.md
+  - _micros/ssh-from-chromeos-terminal.md
 ---
 
 ChromeOS can run Linux containers on a virtual machine, in a system called

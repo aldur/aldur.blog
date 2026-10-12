@@ -6,6 +6,9 @@ categories: [articles]
 excerpt: >
   Building a Python simulation for selecting and evolving "hawks" vs "doves"
   with evolutionary game theory.
+related:
+  - _posts/2024-10-12-free-markets-gene-editing.md
+  - _posts/2025-07-12-lagging-indicators.md
 ---
 
 <div class="note" markdown="1">
