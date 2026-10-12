@@ -40,7 +40,7 @@ account. I implement access control through two layers:
    Caddy controls which devices can access each _service_, based on their
    Tailscale IP addresses.
 
-My IP-based Caddy rules' work, but maintaining an IP allowlist isn't ideal: a
+My IP-based Caddy rules work, but maintaining an IP allowlist isn't ideal: a
 device's IP could change, e.g. after uninstalling and reinstalling the
 Tailscale app. I might be able to replace the IP allowlist by integrating
 Tailscale's [application capabilities][1] with Caddy. I haven't looked into
