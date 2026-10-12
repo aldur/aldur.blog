@@ -53,12 +53,43 @@ layout: base
 
 <script src="{{ '/assets/copy-code.js' | relative_url }}" defer></script>
 
-<nav class="post-navigation">
+<div class="post-reading">
+  {% assign markdown_length = page.url | size %}
+  {% assign url_extension = page.url | slice: -5, 5 %}
+  {% assign last_character = page.url | slice: -1 %}
+  {% if url_extension == '.html' %}
+    {% assign markdown_length = markdown_length | minus: 5 %}
+  {% elsif last_character == '/' %}
+    {% assign markdown_length = markdown_length | minus: 1 %}
+  {% endif %}
+  {% assign markdown_url = page.url | slice: 0, markdown_length | append: '.md' %}
+  <div class="markdown-actions">
+    <a class="view-markdown" href="{{ markdown_url | relative_url }}" aria-label="view as Markdown">view as</a>
+    <span aria-hidden="true">/</span>
+    <button type="button" class="copy-markdown" aria-live="polite">copy .md</button>
+  </div>
+
+{% if page.related and page.related.size > 0 %}
+  {% assign all_posts = site.posts | concat: site.micros %}
+  <nav class="related-reading" aria-labelledby="related-reading-heading">
+    <h2 id="related-reading-heading">Read next</h2>
+    <ul>
+      {% for related_path in page.related %}
+        {% assign related_post = all_posts | where: "path", related_path | first %}
+        <li>
+          <a class="related-link" href="{% link {{ related_path }} %}">{{ related_post.title | escape }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+{% endif %}
+
+<nav class="post-navigation" aria-label="Chronological navigation">
   {% if page.next.url %}
     <div class="nav-next">
       <a href="{{ page.next.url | relative_url }}" rel="next">
-        <span class="nav-arrow">← </span>
-        <span class="nav-title">{{ page.next.title }}</span>
+        <span class="nav-label"><span aria-hidden="true">← </span>Newer post</span>
+        <span class="nav-title">{{ page.next.title | escape }}</span>
       </a>
     </div>
   {% endif %}
@@ -66,9 +97,10 @@ layout: base
   {% if page.previous.url %}
     <div class="nav-previous">
       <a href="{{ page.previous.url | relative_url }}" rel="prev">
-        <span class="nav-title">{{ page.previous.title }}</span>
-        <span class="nav-arrow"> →</span>
+        <span class="nav-label">Older post<span aria-hidden="true"> →</span></span>
+        <span class="nav-title">{{ page.previous.title | escape }}</span>
       </a>
     </div>
   {% endif %}
 </nav>
+</div>

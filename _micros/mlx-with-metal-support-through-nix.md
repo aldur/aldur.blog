@@ -1,6 +1,9 @@
 ---
 title: 'MLX with Metal support through Nix'
 date: 2025-11-04 22:48
+related:
+  - _micros/unlimited-tokens-with-llm-mlx.md
+  - _posts/2026-03-12-sandboxing-local-models-on-macos.md
 ---
 
 We have [talked about](unlimited-tokens-with-llm-mlx.md) how I like running

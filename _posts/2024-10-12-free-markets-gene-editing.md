@@ -4,6 +4,9 @@ title: 'Free markets and gene editing'
 categories: [articles]
 excerpt: >
   The second-order effects of gene editing on mankind.
+related:
+  - _posts/2023-10-27-do-the-evolution.md
+  - _posts/2024-10-21-knowledge.md
 ---
 
 <div class="hint" markdown="1">

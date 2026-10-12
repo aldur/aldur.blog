@@ -2,6 +2,9 @@
 layout: post
 title: "Migrating from GitHub Pages to Cloudflare Pages"
 categories: [articles]
+related:
+  - _posts/2024-10-29-aldur-blog.md
+  - _micros/configuring-jekyll-for-cloudflare-pages-previews.md
 ---
 
 I have recently moved this Jekyll blog from [GitHub

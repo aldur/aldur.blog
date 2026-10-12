@@ -6,6 +6,8 @@ excerpt: >
 last_modified_at: 2025-07-14
 categories: [articles]
 tags: [hammerspoon, emoji]
+related:
+  - _micros/sunsetting-my-hammerspoon-emoji-chooser.md
 ---
 
 <div class="hint" markdown="1"> 

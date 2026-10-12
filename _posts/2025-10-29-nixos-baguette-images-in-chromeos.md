@@ -6,6 +6,9 @@ tags: [ChromeOS]
 last_modified_at: 2026-09-03
 redirect_from:
   - /nixos-baguette
+related:
+  - _posts/2026-02-01-impermanent-nixos-vms-in-baguette.md
+  - _micros/tailscale-for-chromeos-baguette.md
 ---
 
 [_Baguette_ 🥖][21] allows running VM images in ChromeOS. It supersedes

@@ -1,6 +1,6 @@
 ---
 layout: micros
-title: µ
+title: µ notes
 permalink: /micro/
 ---
 

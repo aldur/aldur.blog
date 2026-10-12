@@ -279,10 +279,78 @@ a code {
   }
 }
 
+.post-reading {
+  margin-top: $spacing-unit;
+  padding-top: math.div($spacing-unit, 1.5);
+  border-top: 1px solid var(--minima-border-color-01);
+
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--minima-link-base-color);
+    outline-offset: 4px;
+  }
+}
+
+.markdown-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 0.35em;
+  margin-bottom: math.div($spacing-unit, 2);
+  font-size: 0.8rem;
+
+  a,
+  button {
+    padding: 2px 0;
+    white-space: nowrap;
+  }
+
+  button {
+    border: 0;
+    background: none;
+    color: var(--minima-link-base-color);
+    font: inherit;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--minima-link-hover-color);
+      text-decoration: underline var(--minima-brand-color);
+      text-underline-offset: 3px;
+    }
+  }
+}
+
+.related-reading {
+  h2 {
+    color: var(--minima-brand-color-dimmed);
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+  }
+
+  li + li {
+    margin-top: 6px;
+  }
+}
+
+.related-link {
+  display: block;
+}
+
+.related-reading + .post-navigation {
+  margin-top: $spacing-unit;
+}
+
 .post-navigation {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $spacing-unit;
+  font-size: 0.9rem;
 }
 
 .nav-previous {
@@ -297,11 +365,33 @@ a code {
 
 .nav-previous a, .nav-next a {
   display: flex;
-  gap: 7px
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-label {
+  color: var(--minima-brand-color-dimmed);
+  font-size: 0.8rem;
 }
 
 .nav-previous a {
   text-align: right;
+}
+
+@media screen and (max-width: $on-medium) {
+  .post-navigation {
+    grid-template-columns: minmax(0, 1fr);
+    gap: math.div($spacing-unit, 1.5);
+  }
+
+  .nav-previous {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .nav-previous a {
+    text-align: left;
+  }
 }
 
 kbd {

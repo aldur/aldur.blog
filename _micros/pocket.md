@@ -1,6 +1,8 @@
 ---
 title: 'Zap-It + Miniflux > Pocket'
 date: 2025-07-07
+related:
+  - _posts/2023-10-07-zap-it.md
 ---
 
 Three weeks ago, Mozilla [announced][0] that Pocket will shut down tomorrow.

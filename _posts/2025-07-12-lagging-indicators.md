@@ -2,6 +2,9 @@
 title: 'Paddling in circles: lagging indicators'
 excerpt: >
   🛶 Thinking in systems through models, loops, and delays.
+related:
+  - _posts/2024-10-21-knowledge.md
+  - _posts/2025-09-08-nuggets-of-psychology.md
 ---
 
 Last weekend I went kayaking on the [Ardèche

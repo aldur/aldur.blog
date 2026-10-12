@@ -2,6 +2,9 @@
 title: 'Multiple Crostini containers in ChromeOS < 141'
 date: 2025-06-19
 tags: [ChromeOS]
+related:
+  - _posts/2025-06-19-nixos-in-crostini.md
+  - _posts/2025-10-29-nixos-baguette-images-in-chromeos.md
 ---
 
 ChromeOS < 141 provides an experimental UI for creating and managing multiple

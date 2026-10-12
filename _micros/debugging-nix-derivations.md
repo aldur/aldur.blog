@@ -2,6 +2,8 @@
 title: 'Debugging Nix derivations'
 date: 2025-09-09
 last_modified_at: 2025-11-23
+related:
+  - _posts/2024-10-27-nix-hashes.md
 ---
 
 A living collection of tips to debug Nix derivations.

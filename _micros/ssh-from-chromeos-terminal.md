@@ -2,6 +2,9 @@
 title: 'SSH from ChromeOS'
 date: 2025-07-28
 tags: [ChromeOS]
+related:
+  - _posts/2025-06-26-yubikey-agent.md
+  - _micros/fido2-almost-works-in-linux-on-chromeos.md
 ---
 
 ChromeOS allows SSH authentication through either the built-in Terminal

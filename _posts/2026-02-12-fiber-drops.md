@@ -2,6 +2,9 @@
 title: 'Why my internet dropped like clockwork'
 excerpt: >
   A misconfigured watchdog in my ISP router brought me offline every two hours.
+related:
+  - _posts/2024-05-22-secd.md
+  - _posts/2024-11-08-debug.md
 ---
 
 I recently upgraded my home network to gigabit internet provided by O2, the

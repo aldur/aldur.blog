@@ -2,6 +2,9 @@
 title: 'ChromeOS notifications from NixOS'
 date: 2026-01-18
 tags: [ChromeOS]
+related:
+  - _posts/2025-10-29-nixos-baguette-images-in-chromeos.md
+  - _posts/2025-06-19-nixos-in-crostini.md
 ---
 
 A few days ago {% include github_link.html

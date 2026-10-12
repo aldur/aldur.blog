@@ -4,6 +4,9 @@ title: 'Traveling knowledge'
 categories: [articles]
 excerpt: >
   Knowledge in the head, in the world, in our genes.
+related:
+  - _posts/2025-07-12-lagging-indicators.md
+  - _posts/2026-03-20-human-voices.md
 ---
 
 #### From the world, to the head

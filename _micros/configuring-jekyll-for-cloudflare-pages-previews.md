@@ -1,6 +1,8 @@
 ---
 title: 'Configuring Jekyll for Cloudflare Pages previews'
 date: 2026-03-21 18:20:00 +0200
+related:
+  - _posts/2023-10-15-migrating-to-cloudflare-pages.md
 ---
 
 [Cloudflare Pages][0] previews deployments at
