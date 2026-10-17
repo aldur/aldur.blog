@@ -7,6 +7,7 @@ tags: [ChromeOS]
 related:
   - _posts/2025-06-26-yubikey-agent.md
   - _posts/2026-02-01-impermanent-nixos-vms-in-baguette.md
+  - _micros/til-systemd-ssh-proxy.md
 ---
 
 When working in
@@ -63,7 +64,7 @@ year, so hopefully this will be fixed soon.
 
 Yubico originally maintained the aptly named
 [`yubico-pam`](https://github.com/Yubico/yubico-pam/tree/master) module, which
-relies on HMAC-SHA1 Challenge-Response. 
+relies on HMAC-SHA1 Challenge-Response.
 
 This module is now deprecated, but I managed to get it working by digging
 through the [old
@@ -139,7 +140,7 @@ services.openssh.settings.AllowUsers = [ "root" ];
 This approach strikes an good trade-off. OpenSSH is battle-tested and would be
 running anyway, adding no new services. While I typically disable SSH for
 `root` to reduce attack surface, the container runs in a namespaced network
-connected only to the host, which mitigates the risk. 
+connected only to the host, which mitigates the risk.
 
 The main downside is usability. This approach leaves out `sudo`; the `root`
 shell comes with its own profile and environmental variables, which reduces
@@ -176,4 +177,3 @@ public keys are user-writable and render the system insecure. Use it with care!
 #### Footnotes
 
 [^shared_kernel]: Yes, I am aware of the perils of a shared kernel and its exploits.
-
