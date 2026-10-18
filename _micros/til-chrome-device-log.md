@@ -1,7 +1,7 @@
 ---
 title: 'TIL: chrome://device-log'
 date: 2026-10-18
-tags: [ChromeOS]
+tags: [ChromeOS, TIL]
 ---
 
 Today I learned that navigating to `chrome://device-log` pretty prints
