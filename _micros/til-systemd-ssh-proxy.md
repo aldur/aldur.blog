@@ -2,6 +2,7 @@
 title: 'TIL: systemd-ssh-proxy'
 date: 2026-10-17
 related: _posts/2025-06-27-yubikey-root-login.md
+tags: [TIL]
 ---
 
 I use `ssh` as a [poor man's
