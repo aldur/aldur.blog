@@ -10,7 +10,7 @@ single-user, multidevice network).
 This mostly worked, but didn't follow Tailscale's [recommendations][0] on tags:
 
 > Only use tags for non-human machines.
-> [...]
+> \[...\]
 > Do not use tags to:
 >
 > - Annotate user devices.
