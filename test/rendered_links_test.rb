@@ -1,32 +1,11 @@
 # frozen_string_literal: true
 
-# Run through the rendered-links check defined in test/tests.nix.
-require "jekyll"
-require "json"
+# Run through the test-rendered-links target in test/tests.nix.
 require "tmpdir"
 require "fileutils"
-require "open3"
-require "bundler"
-require_relative "../_plugins/relative_links_multiline"
+require_relative "../bin/check_rendered_links"
 
-ROOT = File.expand_path("..", __dir__)
-CHECKER = File.join(__dir__, "check_rendered_links.py")
-BASEURL = "/__linkcheck__"
-
-def build_preview(config)
-  site = Jekyll::Site.new(config.merge("baseurl" => BASEURL))
-  site.process
-  sources = (site.pages + site.docs_to_write).to_h do |document|
-    [Pathname.new(document.destination(site.dest)).relative_path_from(Pathname.new(site.dest)).to_s,
-     document.relative_path]
-  end
-  File.write(File.join(site.dest, ".sources.json"), JSON.generate(sources))
-end
-
-def check_preview(destination)
-  # HTMLProofer is supplied by Nix with its own bundle, separate from Jekyll.
-  Bundler.with_unbundled_env { Open3.capture3("python3", CHECKER, destination) }
-end
+BASEURL = RenderedLinks::BASEURL
 
 Dir.mktmpdir("rendered-links-") do |temporary|
   # Exercise the actual Markdown/Liquid pipeline, including wrapped links.
@@ -53,8 +32,8 @@ Dir.mktmpdir("rendered-links-") do |temporary|
   Dir.chdir(fixture) do
     cases.each do |markdown, expected_error|
       File.write(source, "---\ntitle: Source\n---\n# Source\n\n#{markdown}\n")
-      build_preview(config)
-      stdout, stderr, status = check_preview(config["destination"])
+      RenderedLinks.build_preview(config)
+      stdout, stderr, status = RenderedLinks.check_preview(config["destination"])
       if expected_error
         unless !status.success? && (stdout + stderr).include?(expected_error) && (stdout + stderr).include?(source)
           raise "Expected #{expected_error.inspect} for #{markdown.inspect}:\n#{stdout}#{stderr}"
@@ -65,14 +44,4 @@ Dir.mktmpdir("rendered-links-") do |temporary|
     end
   end
   puts "Rendered link regression checks passed."
-
-  Dir.chdir(ROOT) do
-    config = Jekyll.configuration("source" => ROOT, "destination" => File.join(temporary, "site"),
-                                  "future" => true, "show_drafts" => true)
-    build_preview(config)
-    stdout, stderr, status = check_preview(config["destination"])
-    puts stdout
-    warn stderr unless stderr.empty?
-    abort "Rendered link checks failed." unless status.success?
-  end
 end

@@ -94,6 +94,7 @@ exclude:
   - flake.*
   - flake.nix
   - gemset.nix
+  - checks.nix
   - .direnv/
   - cloudflare_build.sh
   - wrangler.toml
