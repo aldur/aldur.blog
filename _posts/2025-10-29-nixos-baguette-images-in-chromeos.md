@@ -249,7 +249,7 @@ users), but Baguette improves a few things for me as well:
 1. A containerless VM has better access to the underlying hardware and better
    control of its `init`. This might make it easier to implement [ephemeral
    storage][18] and seems to fix an issue with [`pcscd`][20] that would make it
-   stop interacting with Yubikeys after a while, until restarted.
+   stop interacting with YubiKeys after a while, until restarted.
 
 Thanks for reading, and 'til next time! 👋
 
