@@ -33,13 +33,13 @@ Secure Shell and the Terminal will default to the newer `wassh`, unless forced
 to pick `nassh` through the `--ssh-client-version=pnacl` relay server
 [option](https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/options.md).
 
-#### Yubikey support
+#### YubiKey support
 
 Now things get messy. I generate my
-[SSH identities on a Yubikey](../_posts/2025-06-26-yubikey-agent.md). Terminal
+[SSH identities on a YubiKey](../_posts/2025-06-26-yubikey-agent.md). Terminal
 and Secure Shell
 [support](https://chromium.googlesource.com/apps/libapps/+/HEAD/nassh/docs/hardware-keys.md)
-Yubikeys thanks to the [Smart Card
+YubiKeys thanks to the [Smart Card
 Connector](https://chromewebstore.google.com/detail/smart-card-connector/khpfeaanjngmcnplbdlpegiifgpfgdco)
 app and the `--ssh-agent=gsc` relay option.
 
@@ -89,7 +89,7 @@ Kinda. As long as the changes are pending, SSH from the Terminal requires to:
 1. Open the developer console, which loads the overrides.
 1. Force-reloading the client with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>.
 
-If all the steps went correctly, this should result in the Yubikey PIN prompt.
+If all the steps went correctly, this should result in the YubiKey PIN prompt.
 It works, and it is great that it does since it provides a fallback in case
 something else breaks and you need SSH from ChromeOS. But the UX _sucks_.
 

@@ -1,8 +1,8 @@
 ---
-title: 'Two SSH keys on a Yubikey'
+title: 'Two SSH keys on a YubiKey'
 date: 2025-06-26 11:17:00 +0200
 excerpt: >
-  I use a single Yubikey and two SSH keys to authenticate to remote hosts and sign commits.
+  I use a single YubiKey and two SSH keys to authenticate to remote hosts and sign commits.
 tags: [ChromeOS]
 related:
   - _posts/2025-06-27-yubikey-root-login.md
@@ -10,10 +10,10 @@ related:
 ---
 
 With [NixOS containers in ChromeOS](2025-06-19-nixos-in-crostini.md), I use an
-SSH key in a Yubikey to authenticate to remote hosts and keep the key separated
+SSH key in a YubiKey to authenticate to remote hosts and keep the key separated
 from the container.
 
-Creating keys on the Yubikey and ensuring good UX while using them can be
+Creating keys on the YubiKey and ensuring good UX while using them can be
 tricky, but [`yubikey-agent`][0] makes it seamless. There's a catch though! It
 supports one SSH key only, while I'd like to use two:
 
@@ -32,12 +32,12 @@ Luckily, the agent is written in Go, is easy to understand. The
 [`piv-go`][1] does the heavy lifting. Under the
 hood:
 
-- It asks the Yubikey to generate an elliptic curve (ECC256) key pair in the
+- It asks the YubiKey to generate an elliptic curve (ECC256) key pair in the
 PIV Authentication slot.
 - Then it creates a self-signed X509 certificate to wrap the public key and
 make it available to clients (our SSH agent) through the PKCS#11 interface.
 
-[This Yubikey tutorial][2] describes roughly the same process, but I find the
+[This YubiKey tutorial][2] describes roughly the same process, but I find the
 Go code easier to read and more precise. In addition, the setup guides the user
 through the PIN/PUK setup and removes the need for a management key by
 delegating its control to the PIN/PUK.
@@ -48,13 +48,13 @@ then serve it through the SSH agent. I initially considered generating the key
 through the CLI, but the delegation of the management key made it hard to do,
 so I just went with code for the setup as well. By poking around the `piv-go`
 code and the PIV standard, I decided to use slot `9c`, which is used for
-Signature (the Yubikey docs even mention using it for `git commit`).
+Signature (the YubiKey docs even mention using it for `git commit`).
 
 The result is in {% include github_link.html
 url="https://github.com/aldur/yubikey-agent" text="my fork of the project" %}.
 I intentionally kept the code as simple as possible, so that it is easy to
 maintain and follow upstream (in case I need to). If you want to try it out,
-setup the Yubikey as usual and then run `yubikey-agent -setup-sign` to generate
+setup the YubiKey as usual and then run `yubikey-agent -setup-sign` to generate
 the additional key. When running the agent, it will gracefully try loading both
 keys and ignore the one for Signatures if it cannot be found.
 

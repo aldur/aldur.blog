@@ -46,7 +46,7 @@ ideal.
 
 ### Take 2: _unsupported_, `pam-u2f`
 
-Since I [already use a Yubikey](2025-06-26-yubikey-agent.md) to authenticate
+Since I [already use a YubiKey](2025-06-26-yubikey-agent.md) to authenticate
 through SSH, sign commits, and even decrypt vaults, I considered using it for
 privilege escalation as well. This approach would maintain a separation of
 concerns between the users while providing a reasonable security
@@ -73,10 +73,10 @@ docs](https://github.com/Yubico/yubico-pam/blob/master/doc/Authentication_Using_
 <details markdown=1>
   <summary markdown=span>Setting up `yubico-pam` in NixOS</summary>
 
-First, setup the Yubikey:
+First, setup the YubiKey:
 
 ```bash
-# Configure the Yubikey OTP Slot 2 for Challenge-Response
+# Configure the YubiKey OTP Slot 2 for Challenge-Response
 nix shell nixpkgs#yubikey-personalization
 ykpersonalize -2 -ochal-resp -ochal-hmac -ohmac-lt64 -oserial-api-visible
 
@@ -89,7 +89,7 @@ ykpamcfg -2 -v -t /tmp
 ```
 
 Next, configure `yubico-pam` in NixOS so that it relies on local
-challenge/response (instead of cloud-based) and so that the Yubikey replaces
+challenge/response (instead of cloud-based) and so that the YubiKey replaces
 the password:
 
 ```nix
@@ -110,14 +110,14 @@ security.pam.yubico = {
 };
 ```
 
-Lastly, rebuild your system configuration, plug-in the Yubikey, attach it to
+Lastly, rebuild your system configuration, plug-in the YubiKey, attach it to
 the Termina VM, and try using `su` or `sudo` to escalate privileges.
 
 </details><br/>
 
-Unlike `pam-u2f`, this module does _not_ require touching the Yubikey when
+Unlike `pam-u2f`, this module does _not_ require touching the YubiKey when
 authenticating. For this reason, this method is _almost_ as weak as
-passwordless `sudo`. An attacker can easily escalate privileges if the Yubikey
+passwordless `sudo`. An attacker can easily escalate privileges if the YubiKey
 is plugged-in, while the user will have a hard time noticing it.
 
 ### Take 4: good old SSH
@@ -165,7 +165,7 @@ By default, the module will read keys from `/etc/ssh/authorized_keys.d/%u`
 This setup leverages the existing `SSH_AUTH_SOCK` and, for this, is also
 compatible with
 [`yubikey-agent`](https://github.com/FiloSottile/yubikey-agent). running `sudo
-echo "Hello world!"` will prompt for your Yubikey PIN (just like SSH) and
+echo "Hello world!"` will prompt for your YubiKey PIN (just like SSH) and
 elevate your permissions.
 
 The trade-off here is harder to evaluate: it brings a usability win with
