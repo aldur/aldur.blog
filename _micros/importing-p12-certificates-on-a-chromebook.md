@@ -20,7 +20,7 @@ To add a `.p12` certificate to ChromeOS' certificate manager:
 "_Import and bind_" stores the certificate [on the device's Trusted Platform
 Module (TPM)][0].
 
-It might be possible to also store the certificate on a Yubikey through the
+It might be possible to also store the certificate on a YubiKey through the
 [Personal Identity Verification (PIV)][2] app and then use it on a Chromebook
 through the [Smart Card Connector][1] and a middleware. I haven't tried this
 approach yet, but I hear it is tricky on non-enterprise devices.

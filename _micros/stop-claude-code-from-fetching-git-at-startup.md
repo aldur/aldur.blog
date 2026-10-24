@@ -4,9 +4,9 @@ date: 2026-03-12
 ---
 
 Since a couple of weeks ago, issuing a first prompt to `claude-code` results in
-an unattended request to unlock/touch the Yubikey that holds my SSH keys, as if
+an unattended request to unlock/touch the YubiKey that holds my SSH keys, as if
 it is trying to do a `git` operation on my behalf. The whole thing is
-confusing, because the Yubikey request is "blind": it doesn't specify which
+confusing, because the YubiKey request is "blind": it doesn't specify which
 command is being executed and for which purpose. Others have noticed the
 [issue][0] as well.
 
