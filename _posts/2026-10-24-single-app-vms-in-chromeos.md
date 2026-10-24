@@ -1,7 +1,10 @@
 ---
-title: 'Single-app VMs in ChromeOS'
+title: A poor man's Qubes OS
 excerpt: >
-  A poor man's Qubes OS.
+  Single-app VMs in ChromeOS.
+related:
+  - _posts/2025-10-29-nixos-baguette-images-in-chromeos.md
+  - _posts/2026-02-01-impermanent-nixos-vms-in-baguette.md
 ---
 
 We have talked about wrapping [AutoFirma into its own
