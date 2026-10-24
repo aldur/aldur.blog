@@ -5,6 +5,7 @@ excerpt: >
 related:
   - _posts/2025-10-29-nixos-baguette-images-in-chromeos.md
   - _posts/2026-02-01-impermanent-nixos-vms-in-baguette.md
+  - _micros/recovery-signing-node-tailscale-lock.md
 ---
 
 We have talked about wrapping [AutoFirma into its own
