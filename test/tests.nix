@@ -4,6 +4,14 @@
   jekyllEnv,
 }:
 {
+  test-cloudflare-redirects = buildJekyll.overrideAttrs (_: {
+    name = "test-cloudflare-redirects";
+    buildPhase = ''
+      unset BUNDLE_PATH
+      ${jekyllEnv}/bin/bundler exec -- ruby test/cloudflare_redirects_test.rb
+    '';
+    installPhase = "touch $out";
+  });
   test-markdown-references = buildJekyll.overrideAttrs (_: {
     name = "test-markdown-references";
     buildPhase = ''

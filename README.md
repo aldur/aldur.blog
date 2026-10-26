@@ -104,6 +104,9 @@ redirect_from:
   - /short-link
 ```
 
+The build generates Cloudflare `_redirects` rules from these fields to return
+HTTP `301` to the page.
+
 ### Opengraph images
 
 The [`og_image`](./_plugins/og_image.rb) plugin generates a per-post
