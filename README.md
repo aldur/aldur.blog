@@ -83,6 +83,9 @@ source by changing its URL to end with `.md`:
 
 `/llms.txt` indexes posts and micros in markdown.
 
+A generated `_headers` file sets a canonical `Link` HTTP header on each
+Markdown copy when served through Cloudflare.
+
 ### GitHub link icons
 
 Links to `https://github.com/aldur` automatically get a GitHub SVG icon. Opt

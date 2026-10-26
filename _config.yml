@@ -88,6 +88,9 @@ liquid:
 
 incremental         : false
 
+include:
+  - _headers
+
 exclude:
   - LICENSE
   - README.md
