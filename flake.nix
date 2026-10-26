@@ -156,7 +156,6 @@
           OG_RENDER_SCRIPT = "${ogRenderer}/og-render.mjs";
           buildPhase = ''
             unset BUNDLE_PATH
-            ${nodejs}/bin/node --test bin/og-render.test.mjs
             ${jekyllEnv}/bin/bundler exec -- jekyll build ${jekyllArgs};
             mkdir $out;
             mv _site $out;
@@ -199,9 +198,13 @@
           '';
       in
       {
-        checks = import ./test/tests.nix {
-          inherit pkgs buildJekyll jekyllEnv;
-        };
+        checks =
+          (import ./checks.nix {
+            inherit pkgs buildJekyll jekyllEnv;
+          })
+          // (import ./test/tests.nix {
+            inherit pkgs buildJekyll jekyllEnv;
+          });
 
         packages = {
           lockGemset = writeRepoShellScriptBin "lock" ''

@@ -23,7 +23,7 @@ Install [Nix][1] and enable [flakes][2]. Then, run `nix run`.
 - `bundler update` will update your Gems. `bundler` is configured to use the
   `vendor` directory, so that it won't try installing it under `nix` store.
 - `nix run '.#lock'` will generate the `gemset.nix` file from `Gemfile.lock`.
-- `nix flake check` will test the build and run linters.
+- `nix flake check` runs the content checks and regression tests.
 
 ## Features
 

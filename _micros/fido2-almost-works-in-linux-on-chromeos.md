@@ -22,35 +22,35 @@ hardened kernel, not all USB devices will work correctly.
 
 After some trial and error, I
 [managed](../_posts/2025-06-19-nixos-in-crostini.md#how-to-usb-forwarding) to
-get Yubikeys to work reliably in Linux for SSH for authentication and
+get YubiKeys to work reliably in Linux for SSH for authentication and
 signatures. Under the hood, the
 [`yubikey-agent`](../_posts/2025-06-26-yubikey-agent.md) and the `pcscd (8)`
-Linux processes communicate with the Yubikey through its [PIV
+Linux processes communicate with the YubiKey through its [PIV
 interface](https://developers.yubico.com/yubico-piv-tool/YubiKey_PIV_introduction.html).
 This does the job well-enough, but has two downsides:
 
 1. `pcscd` and `yubikey-agent` add moving parts. They could break, misbehave,
    or have vulnerabilities.
-1. The Linux VM/container acquire an exclusive lock on the Yubikey, which
+1. The Linux VM/container acquire an exclusive lock on the YubiKey, which
    cannot be used from ChromeOS until detached (e.g., as a passkey).
 
 #### FIDO2
 
 Can we do better?
 
-In 2020, `openssh` rolled out support for FIDO2 security keys ([Yubikeys can
+In 2020, `openssh` rolled out support for FIDO2 security keys ([YubiKeys can
 do that too](https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html)).
 FIDO2 is the same technology powering WebAuthn and passkeys. It requires that
 the cryptographic keys used for authentication (in this case) never leave the
 device. They also require the hardware to validate _user presence_ (by touching
-the Yubikey) before producing any signature. This ensures that malware will not
+the YubiKey) before producing any signature. This ensures that malware will not
 be able to either _exfiltrate_ the secret or use it without the user knowing.
 
 Under the hood, FIDO2 relies on [raw USB HID
 access](https://docs.kernel.org/hid/hidraw.html), typically exposed by the
 Linux kernel at `/dev/hidraw*`. The `vmc usb-attach` command that forwards USB
 devices from the Chromebook to the container does not forward the raw HID and,
-for this, the container will not be able to interact with the Yubikey using
+for this, the container will not be able to interact with the YubiKey using
 FIDO2.
 
 The other day, while poking around the `vmc` command used to setup Linux on
@@ -68,7 +68,7 @@ Maybe, that would enable FIDO2 keys to work in containers? I decided to find tha
 
 #### Raw HID passthrough
 
-After plugging the Yubikey, `dmesg` in Crosh tells us that it exposes two HID interfaces:
+After plugging the YubiKey, `dmesg` in Crosh tells us that it exposes two HID interfaces:
 
 ```txt
 [ 4058.807454] usb 2-1.1: new full-speed USB device number 5 using xhci-mtk
@@ -143,7 +143,7 @@ There we go!
 
 Unfortunately, this is where things break — end of the line, apparently. When
 trying to authenticate through the key, the process will _freeze_ and,
-occasionally, bring the whole VM with it. This seems to happen when the Yubikey
+occasionally, bring the whole VM with it. This seems to happen when the YubiKey
 checks for user presence (i.e., it blinks and wants you to touch it):
 
 ```bash
