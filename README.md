@@ -83,6 +83,9 @@ source by changing its URL to end with `.md`:
 
 `/llms.txt` indexes posts and micros in markdown.
 
+A generated `_headers` file sets a canonical `Link` HTTP header on each
+Markdown copy when served through Cloudflare.
+
 ### GitHub link icons
 
 Links to `https://github.com/aldur` automatically get a GitHub SVG icon. Opt
@@ -100,6 +103,9 @@ Use [`jekyll-redict-from`][3] to add multiple URLs for a page.
 redirect_from:
   - /short-link
 ```
+
+The build generates Cloudflare `_redirects` rules from these fields to return
+HTTP `301` to the page.
 
 ### Opengraph images
 

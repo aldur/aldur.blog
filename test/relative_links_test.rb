@@ -80,7 +80,7 @@ Dir.mktmpdir("relative-links-") do |root|
 
       documents.each do |document|
         { "Post" => "/custom/", "Micro" => "/micros/2020/01/02/target/",
-          "Page" => "/about/#heading", "Collection" => "/tags/example.html",
+          "Page" => "/about/#heading", "Collection" => "/tags/example",
           "Root" => "/about/", "Reference" => "/about/", "Liquid" => "/custom/",
           "Wrapped post" => "/custom/#heading", "Wrapped destination" => "/about/#heading",
           "Wrapped reference" => "/about/",

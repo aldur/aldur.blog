@@ -88,6 +88,9 @@ liquid:
 
 incremental         : false
 
+include:
+  - _headers
+
 exclude:
   - LICENSE
   - README.md
@@ -114,6 +117,7 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+      permalink: /:categories/:year/:month/:day/:title
       categories:
         - "articles"
   # Same for `micros`
@@ -144,7 +148,7 @@ collections:
     show_excerpts: false
   tag_indexes:
     output: true
-    permalink: tags/:name:output_ext
+    permalink: tags/:name
 
 redirect_from:
   json: false

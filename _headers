@@ -1,0 +1,9 @@
+---
+layout: none
+permalink: /_headers
+---
+{{ '/articles/*.md' | relative_url }}
+  Link: <{{ '/articles/' | absolute_url }}:splat>; rel="canonical"
+
+{{ '/micros/*.md' | relative_url }}
+  Link: <{{ '/micros/' | absolute_url }}:splat/>; rel="canonical"
