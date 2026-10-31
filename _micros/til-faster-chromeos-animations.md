@@ -13,11 +13,11 @@ Today I learned how to enable faster animations on ChromeOS, a bit hackishly:
    to 0x or 0.5x.
 
 <div class="video-container">
-  <video class="responsive-video" controls muted playsinline preload="none"
+  <video class="responsive-video" autoplay loop controls muted playsinline
          poster="{% link images/faster-chromeos-animations.webp %}"
          aria-label="Change the ChromeOS animation speed in the debug menu">
     <source src="{% link uploads/faster-chromeos-animations.mp4 %}" type="video/mp4">
     <a href="{% link uploads/faster-chromeos-animations.mp4 %}">Download the video.</a>
   </video>
-  <p class="video-caption">Set the animation speed in the ChromeOS debug menu.</p>
+  <p class="video-caption">Setting the animation speed in the debug menu and seeing the speed difference.</p>
 </div>
