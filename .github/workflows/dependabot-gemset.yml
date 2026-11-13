@@ -37,16 +37,33 @@ jobs:
         id: push
         env:
           GH_TOKEN: ${{ github.token }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        # Create the commit through the API so that GitHub signs it.
+        # Branch protection requires verified signatures.
         run: |
           if git diff --quiet -- Gemfile.lock gemset.nix; then
             echo "gemset.nix already up to date."
             exit 0
           fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Gemfile.lock gemset.nix
-          git commit -m "Update gemset.nix"
-          git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push
+          additions=$(git diff --name-only -- Gemfile.lock gemset.nix |
+            while read -r f; do
+              jq -n --arg path "$f" --arg contents "$(base64 -w0 "$f")" \
+                '{path: $path, contents: $contents}'
+            done | jq -s .)
+          jq -n \
+            --arg repo "$GITHUB_REPOSITORY" \
+            --arg branch "$HEAD_REF" \
+            --arg head "$(git rev-parse HEAD)" \
+            --argjson additions "$additions" \
+            '{
+              query: "mutation($input: CreateCommitOnBranchInput!) { createCommitOnBranch(input: $input) { commit { oid } } }",
+              variables: {input: {
+                branch: {repositoryNameWithOwner: $repo, branchName: $branch},
+                expectedHeadOid: $head,
+                message: {headline: "Update gemset.nix"},
+                fileChanges: {additions: $additions}
+              }}
+            }' | gh api graphql --input -
           echo "pushed=true" >> "$GITHUB_OUTPUT"
       # Pushes made with GITHUB_TOKEN don't trigger other workflows, so
       # check.yml won't run on the new commit. Run the checks here instead.
